@@ -237,7 +237,7 @@
                             <div class="hbb_box">
                                 <p class="m-0">For further support please dial <t t-esc="res_company.phone"/> </p>
                                 <p>
-                                    <a t-attf-href="/my/orders/#{order.id}" title="Order detail">Click here </a>to track your order</p>
+                                    <a t-attf-href="/my/orders?" title="Order detail">Click here </a>to track your order</p>
                             </div>
                             <a href="/feedback" title="Give us your feedback" class="btn btn-primary px-5 mt-3">Give us your feedback</a>
                         </div>
