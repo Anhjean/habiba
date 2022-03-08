@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<data>
+    <template id="portal_breadcrumbs" active="True" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//a[@href='/my/home']" position="replace">
+            <a href="/my/home" aria-label="Home" title="Home" class="">My account</a><i class="fa fa-chevron-right fw-normal mx-2 d-flex align-items-center cst-text-primary"/>
+        </xpath>
+    </template>
+    <template id="my_pass_cust" active="True" inherit_id="portal.portal_my_security" name="My Pass"> 
+        <xpath expr="//form[@class='oe_reset_password_form']" position="replace">
+            <form action="/my/security" method="post" class="oe_reset_password_form pt-3">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <input type="hidden" name="op" value="password"/>
+                    <ol class="o_portal_submenu breadcrumb mb-0 py-4 flex-grow-1 row">
+                        <li class="breadcrumb-item ml-1"><a href="/my/home" aria-label="Home" title="Home" class="">My account</a><i class="fa fa-chevron-right fw-normal mx-2 d-flex align-items-center cst-text-primary"/></li>
+                        <li class="breadcrumb-item cst-text-primary fw-bold">Change password</li>
+                    </ol>
+                    <div class="form-group curr_change_pass">
+                        <label class="fw-bold" style="color:#0057cf" for="current">Current password</label>
+                        <input type="password" t-attf-class="form-control form-control-sm {{ 'is-invalid' if get_error(errors, 'password.old') else '' }}" id="current" name="old" autocomplete="current-password" required="required" placeholder="Please type your new current password"/>
+                        <div class="invalid-feedback">
+                            <t t-esc="get_error(errors, 'password.old')"/>
+                        </div>
+                    </div>
+                    <div class="form-group ne_change_pass">
+                        <label class="fw-bold" style="color:#0057cf" for="new">New Password</label>
+                        <input type="password" t-attf-class="form-control form-control-sm {{ 'is-invalid' if get_error(errors, 'password.new1') else '' }}" id="new" name="new1" autocomplete="new-password" required="required" placeholder="Please type new password"/>
+                        <div class="invalid-feedback">
+                            <t t-esc="get_error(errors, 'password.new1')"/>
+                        </div>
+                    </div>
+                    <div class="form-group re_change_pass">
+                        <label class="fw-bold" style="color:#0057cf" for="new2">Re-type new password</label>
+                        <input type="password" t-attf-class="form-control form-control-sm {{ 'is-invalid' if get_error(errors, 'password.new2') else '' }}" id="new2" name="new2" autocomplete="new-password" required="required" placeholder="Please re-type your new password"/>
+                        <div class="invalid-feedback">
+                            <t t-esc="get_error(errors, 'password.new2')"/>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary px-4 fw-bold">save</button>
+                </form>
+        </xpath>
+        <!-- <xpath expr="//div[hasclass('curr_change_pass')]" position="before">
+            <div class="rounded mx-0 col-8 cst-d-inline-block bg-light my-5 p-5">
+
+            </div>
+        </xpath> -->
+        <xpath expr="//div//section//h3" position="replace">
+            
+        </xpath>
+        <xpath expr="//div//section" position="attributes">
+            <attribute name="class">my_custom</attribute>
+        </xpath>
+    </template>
+    <!-- <template id="edit_custom" active="True" inherit_id="portal.portal_my_details" name="Portal Custom Me">
+        <xpath expr="//div[hasclass('o_portal_details')]" position="replace">
+             <form action="/my/account" method="post">  
+                <div class="form-row">
+                    <div t-attf-class="form-group #{error.get('name') and 'o_has_error' or ''} col-lg-12 div_name">
+                        <label class="col-form-label" for="name">Name</label>
+                        <input type="text" name="name" t-attf-class="hbb_text_box form-control #{error.get('name') and 'is-invalid' or ''}" t-att-value="'name' in checkout and checkout['name']" placeholder="Please enter recipient name"/>
+                    </div>
+                    <div class="w-100"/>
+                    <t t-if="mode[1] == 'billing'">
+                        <div t-attf-class="form-group #{error.get('email') and 'o_has_error' or ''} col-lg-12" id="div_email">
+                            <label class="col-form-label" for="email">Email</label>
+                            <input type="email" name="email" t-attf-class="hbb_text_box form-control #{error.get('email') and 'is-invalid' or ''}" t-att-value="'email' in checkout and checkout['email']" />
+                        </div>
+                    </t>
+                    <div t-attf-class="form-group #{error.get('phone') and 'o_has_error' or ''} col-lg-12" id="div_phone">
+                        <label class="col-form-label" for="phone">Phone number</label>
+                        <input type="tel" name="phone" t-attf-class="hbb_text_box form-control #{error.get('phone') and 'is-invalid' or ''}" t-att-value="'phone' in checkout and checkout['phone']" />
+                    </div>
+                    <div class="w-100"/>
+                    <div t-attf-class="form-group #{error.get('street') and 'o_has_error' or ''} col-lg-12 div_street">
+                        <label class="col-form-label" for="street">Address <span class="d-none d-md-inline"> and Number</span>
+                        </label>
+                        <input type="text" name="street" t-attf-class="hbb_text_box form-control #{error.get('street') and 'is-invalid' or ''}" t-att-value="'street' in checkout and checkout['street']" placeholder="Please enter house number or building name"/>
+                    </div>
+                    <div t-attf-class="form-group #{error.get('street2') and 'o_has_error' or ''} col-lg-12 div_street2">
+                        <label class="col-form-label label-optional" for="street2">Address street</label>
+                        <input type="text" name="street2" t-attf-class="hbb_text_box form-control #{error.get('street2') and 'is-invalid' or ''}" t-att-value="'street2' in checkout and checkout['street2']" placeholder="Please enter street name, ward, district, city"/>
+                    </div>
+                    <div class="w-100"/>
+                    <t t-set='zip_city' t-value='country and [x for x in country.get_address_fields() if x in ["zip", "city"]] or ["city", "zip"]'/>
+                    <t t-if="'zip' in zip_city and zip_city.index('zip') &lt; zip_city.index('city')">
+                        <div t-attf-class="form-group #{error.get('zip') and 'o_has_error' or ''} col-md-4 div_zip">
+                            <label class="col-form-label label-optional" for="zip">Zip Code</label>
+                            <input type="text" name="zip" t-attf-class="hbb_text_box form-control #{error.get('zip') and 'is-invalid' or ''}" t-att-value="'zip' in checkout and checkout['zip']" />
+                        </div>
+                    </t>
+                    <t t-if="'zip' in zip_city and zip_city.index('zip') &gt; zip_city.index('city')">
+                        <div t-attf-class="form-group #{error.get('zip') and 'o_has_error' or ''} col-md-12 div_zip">
+                            <label class="col-form-label label-optional" for="zip">Zip Code</label>
+                            <input type="text" name="zip" t-attf-class="hbb_text_box form-control #{error.get('zip') and 'is-invalid' or ''}" t-att-value="'zip' in checkout and checkout['zip']" />
+                        </div>
+                    </t>
+                    <div class="w-100"/>
+                        <div t-attf-class="form-group #{error.get('ward') and 'o_has_error' or ''} col-lg-6 div_ward">
+                        <label class="col-form-label" for="ward">Ward</label>
+                        <input type="text" name="ward" t-attf-class="hbb_text_box form-control #{error.get('ward') and 'is-invalid' or ''}" t-att-value="'ward' in checkout and checkout['ward']"/>
+                    </div>
+                    <div t-attf-class="form-group d-none #{error.get('country_id') and 'o_has_error' or ''} col-lg-6 div_country">
+                        <label class="col-form-label" for="country_id">Country</label>
+                        <select id="country_id" name="country_id" t-attf-class="hbb_text_box form-control #{error.get('country_id') and 'is-invalid' or ''}" t-att-mode="mode[1]">
+                            <option value="">Country...</option>
+                            <t t-foreach="countries" t-as="c">
+                                <option t-att-value="c.id" t-att-selected="c.id == (country and country.id or -1) or c.code == 'VN'">
+                                    <t t-esc="c.name" />
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div t-attf-class="form-group #{error.get('district') and 'o_has_error' or ''} col-lg-6 div_district">
+                        <label class="col-form-label" for="district">District</label>
+                        <input type="text" name="district" t-attf-class="hbb_text_box form-control #{error.get('district') and 'is-invalid' or ''}" t-att-value="'district' in checkout and checkout['district']"/>
+                    </div>
+                    <div t-attf-class="form-group d-none #{error.get('state_id') and 'o_has_error' or ''} col-lg-6 div_state" t-att-style="(not country or not country.state_ids) and 'display: none'">
+                        <label class="col-form-label" for="state_id">State / Province</label>
+                        <select name="state_id" t-attf-class="hbb_text_box form-control #{error.get('state_id') and 'is-invalid' or ''}" data-init="1">
+                            <option value="">State / Province...</option>
+                            <t t-foreach="country_states" t-as="s">
+                                <option t-att-value="s.id" t-att-selected="s.id == ('state_id' in checkout and country and checkout['state_id'] != '' and int(checkout['state_id'])) or s.code == 'VN-SG'">
+                                    <t t-esc="s.name" />
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div t-attf-class="form-group #{error.get('city') and 'o_has_error' or ''} col-md-12 div_city">
+                        <label class="col-form-label" for="city">City</label>
+                        <input type="text" name="city" t-attf-class="hbb_text_box form-control #{error.get('city') and 'is-invalid' or ''}" t-att-value="'city' in checkout and checkout['city']" />
+                    </div>
+                    <div t-attf-class="form-group #{error.get('comment') and 'o_has_error' or ''} col-lg-12 div_comment">
+                        <label class="col-form-label d-none" for="city">Comment:</label>
+                        <textarea name="comment" t-attf-class="hbb_text_box form-control #{error.get('comment') and 'is-invalid' or ''}" t-att-value="'comment' in checkout and checkout['comment']" style="resize: none;" placeholder="Note for your order"></textarea>
+                    </div>
+                    <div class="w-100"/>
+                    <t t-if="mode == ('new', 'billing') and not only_services">
+                        <div class="col-lg-12">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id='shipping_use_same' class="mr8" name='use_same' value="1" checked='checked'/>
+Ship to the same address
+                                    <span class='ship_to_other text-muted' style="display: none">&amp;nbsp;(<i>Your shipping address will be requested later) </i>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                <input type="hidden" name="submitted" value="1" />
+                <input type="hidden" name="partner_id" t-att-value="partner_id or '0'" />
+                <input type="hidden" name="callback" t-att-value="callback" />
+                <input type="hidden" name="field_required" t-att-value="'phone,name'" />
+
+                <div class="justify-content-between d-none">
+                    <a role="button" t-att-href="mode == ('new', 'billing') and '/shop/cart' or '/shop/checkout'" class="btn btn-secondary mb32 hbb_btn_gray">
+                        <i class="fa fa-chevron-left"/>
+                        <span>Back</span>
+                    </a>
+                    <a role="button" href="#" class="btn btn-primary mb32 a-submit a-submit-disable a-submit-loading hbb_btn_yellow">
+                        <span>Next</span>
+                        <i class="fa fa-chevron-right"/>
+                    </a>
+                </div>
+             </form>
+             <div class="clearfix">
+                <button type="submit" class="btn btn-primary float-right mb32 ">
+                    save
+                    <span class="fa fa-long-arrow-right"/>
+                </button>
+            </div>
+        </xpath>
+    </template> -->
+    </data>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="aboutus" name="Habiba About Us">
+            <t t-call="website.layout">
+                <div class="container">
+                    <div id="wrap" class="oe_structure oe_empty">
+                        <section class="s_text_block pt32 pb32 o_colored_level" data-snippet="s_text_block" data-name="Text">
+                          <div class="container s_allow_columns">
+                            <p>Habiba is the grandmother and the tree, a fruit-bearing olive tree, an aged nature. An accumulation of experiences. Yes, we are beyond just a kitchen.</p>
+                            <p>The&amp;nbsp; branches in the trees represent the various cuisines, cultures that we are inspired by.</p>
+                            <p>We are fascinated by this diversity of cooking methods, ingredients, styles, and stories.</p>
+                            <p>Habiba Kitchen is born grateful to nature and people, giving us a great opportunity to build bridges and conversations between communities,&amp;nbsp; together celebrating diversity, simplicity, and openness through shared food, space, feelings, sense, intention and purpose.</p>
+                            <p>Habiba Kitchen is a hybrid concept. Our aim is to be independent, creative, and experimental with no attachment to a single country food/cuisine, product, cooking method, or diet. We exist to highlight foods with stories, we live or wish to live and celebrate with our customers.</p>
+                            <p>Our logo is an olive tree, a&amp;nbsp; fruitful tree through whose fruits we like to tell our story and values. The olive’s life is a journey we identified in 6: a sprout, a white flower, a green olive, green-purple mix, a purple olive, and a black olive</p>
+                            <p>The Sprout &amp;lt;gratefulness&amp;gt;</p>
+                            <p>It is the intention to do and be. Whether it is cooking, sharing food, space, or purpose. It all starts with intention. Being grateful is our starting prayer.</p>
+                            <p>A white flower &amp;lt;simplicity and beauty&amp;gt;</p>
+                            <p>We practice simplicity and contentment throughout our intentions and outcomes. Free of pretence, easy and meaningful</p>
+                            <p>A green olive &amp;lt;sustainable &amp;amp; fresh&amp;gt;</p>
+                            <p>We do our part to the best we can to make sure our footprints live in harmony with nature.</p>
+                            <p>Green-purple mix- &amp;lt;hybridity &amp;amp; coexistence&amp;gt;</p>
+                            <p>Our aim is to bring foods together, building bridges between different cultures as much as bringing people together, setting up a table for a great gathering.</p>
+                            <p>Purple &amp;lt; openness&amp;gt;</p>
+                            <p>The truth is relative. Being open diversifies choices and experience and brings value to our customers. It is our joy to explore and invite you to be on such a journey with us.</p>
+                            <p>A black olive &amp;lt;for harvest&amp;gt;</p>
+                            <p>all the colors, shapes and forms of the olive come together in one. And so our end goal&amp;nbsp; and purpose:&amp;nbsp; Community</p>
+                          </div>
+                        </section>
+                        <section class="s_image_gallery o_spc-small o_masonry pt24 pb24 o_colored_level" data-vcss="001" data-columns="3" style="height: 500px; overflow: hidden;" data-snippet="s_images_wall" data-name="Images Wall">
+                          <div class="container">
+                            <div class="alert alert-info css_non_editable_mode_hidden text-center" role="status">
+                              <span class="o_add_images o_default_snippet_text" style="cursor: pointer;"><i class="fa fa-plus-circle"/> Add Images</span>
+                            </div>
+                          </div>
+                        </section>
+                      </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

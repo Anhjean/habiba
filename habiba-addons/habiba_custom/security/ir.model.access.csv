@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_company_work_schedule,company_work_schedule.manager,model_company_work_schedule,,1,1,1,1
+access_habiba_homecarousel_item,habiba_homecarousel_item.manager,model_habiba_homecarousel_item,,1,1,1,1
+access_habiba_faq_item,habiba_faq_item.manager,model_habiba_faq_item,,1,1,1,1
+access_product_tag,product_tag.manager,product_tags_fork.model_product_tag,,1,1,1,1

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="footer_custom" active="True" inherit_id="website.footer_custom">
+            <xpath expr="//div[@id='footer']" position="replace">
+                <section class="footer hbb_footer">
+                    <div class="container">
+                        <div class="footer_content">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="hbb_footer_logo mb-5 mb-md-0">
+                                        <img src="/habiba_custom/static/src/img/logo.png" class="hbb_logo"/>
+                                        <div class="hbb_time_box">
+                                            <h3>OPEN HOURS</h3>
+                                            <h4>Everyday, 10am-10pm</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 offset-lg-1 col-md-6 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-6 col-sm-12">
+                                            <ul class="hbb_footer_menu mb-5">
+                                                <li>
+                                                    <a href="/contactus" title="CONTACT">CONTACT</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/jobs" title="HIRING">HIRING</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/faq" title="FAQ">FAQ</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/privacypolicy/shipping" title="SHIPPING POLICY">SHIPPING POLICY</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/privacypolicy/payment" title="PAYMENT POLICY">PAYMENT POLICY</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/privacypolicy" title="PAYMENT POLICY">PRIVACY POLICY</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-7 col-md-6 col-sm-12">
+                                            <div class="hbb_subcribe_form hbb_footer_box mb-5">
+                                                <p class="hbb_footer_box-title">Be the first to receive our latest update</p>
+                                                <div class="s_newsletter_subscribe_form js_subscribe row" data-vxml="001" data-list-id="0">
+                                                    <div class="input-group col h-100">
+                                                        <input type="email" placeholder="Enter your email here" name="email" class="form-control h-25 d-inline-block w-50 p-x py-2"/>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary col-3">Send</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="hbb_call_box hbb_footer_box mb-3">
+                                                <p class="hbb_footer_box-title">Call our hotline for further support</p>
+                                                <a href="tel:+84 9123 4567" title="+84 9123 4567">+84 9123 4567</a>
+                                            </div>
+
+                                            <div class="hbb_social_box hbb_footer_box p-2">
+                                                <p class="hbb_footer_box-title">Follow us on social media</p>
+                                                <ul class="ml-0 pl-0">
+                                                    <li>
+                                                        <a href="https://www.instagram.com/" target="_blank">
+                                                            <i class="fa fa-instagram"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="https://www.facebook.com/" target="_blank">
+                                                            <i class="fa fa-facebook-official"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <nav class="footer_mobile_navbar navbar navbar-inverse d-flex d-lg-none justify-content-center bg-light fs-5 position-fixed bottom-0 w-100 px-3 px-sm-5">
+                    <ul class="nav navbar-nav d-flex flex-row w-100 px-0 px-sm-5 text-center">
+                        <li class="col">
+                            <a href="/shop" class="flex">
+                                <i t-attf-class="fw-#{'bold' if unslug_url(request.httprequest.path) == '/shop' else 'normal'} cst-text-primary material-icons" style="">restaurant</i>
+                            </a>
+                        </li>
+                        <li class="col">
+                            <a href="/blog" class="flex" id="rss_feed">
+                                <i t-attf-class="fw-#{'bold' if unslug_url(request.httprequest.path) == '/blog' or unslug_url(request.httprequest.path) == '/blog' else 'normal'} cst-text-primary material-icons" style="">rss_feed</i>
+                            </a>
+                        </li>
+                        <li class="col"><a href="/shop/wishlist" class="flex"><i t-attf-class="fw-#{'bold' if unslug_url(request.httprequest.path) == '/shop/wishlist' else 'normal'} cst-text-primary fa fa-heart"></i></a></li>
+                        <li class="col"><a href="/events" class="flex"><i t-attf-class="fw-normal cst-text-primary fa fa-ticket"></i></a></li>
+                        <li class="col" groups="base.group_public"><a href="/web/login" class="flex"><i t-attf-class="fw-#{'bold' if unslug_url(request.httprequest.path) == '/web/login' else 'normal'} cst-text-primary fa fa-user-plus"></i></a></li>
+                        <li class="col" groups="base.group_user,base.group_portal"><a href="/my/home" class="flex"><i t-attf-class="fw-#{'bold' if unslug_url(request.httprequest.path) == '/my/home' else 'normal'} cst-text-primary fa fa-user"/></a></li>
+                      </ul>
+                </nav>
+            </xpath>
+        </template>
+    </data>
+</odoo>

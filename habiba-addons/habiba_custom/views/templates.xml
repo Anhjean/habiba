@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="product_add_to_wishlist" inherit_id="website_sale_wishlist.product_add_to_wishlist" customize_show="True" name="Wishlist Button">
+        <xpath expr="//button" position="replace">
+            <button t-if="product_variant" type="button" role="button" class="btn btn-link cst-text-primary mt16 o_add_wishlist_dyn" t-att-disabled='in_wish or None' t-att-data-product-template-id="product.id" t-att-data-product-product-id="product_variant.id" data-action="o_wishlist"><span class="fa fa-heart" role="img" aria-label="Add to wishlist"></span> Add to favorites</button>
+        </xpath>
+    </template>
+
+    <template id="product_wishlist" active="True" inherit_id="website_sale_wishlist.product_wishlist" customize_show="True">
+        <xpath expr="//input[@id='b2b_wish']" position="attributes">
+            <attribute name="checked">checked</attribute>
+        </xpath>
+        <xpath expr="//div[@class='checkbox']" position="attributes">
+            <attribute name="class" separator=" " add="d-none"></attribute>
+        </xpath>
+        <xpath expr="//h3" position="replace">
+            <h3 class="cst-text-primary fw-bold pt-4 pb-2 m-0">My Favorite</h3>
+        </xpath>
+        <xpath expr="//t[@t-set='additional_title']" position="replace">
+            <t t-set="additional_title">Shop Favorite</t>
+        </xpath>
+    </template>
+
+
+    <template id="product_custom_detail" active="True" inherit_id="website_sale.product" customize_show="True" name="Terms and Conditions">
+        <xpath expr="//div[@class='col-md-4']" position="attributes">
+            <attribute name="class" separator=" " remove="col-md-4"></attribute>
+            <attribute name="class" separator=" " add="popup-header d-flex justify-content-between"></attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('col-xl-8')]" position="replace">
+            <div class="col-md-6 col-xl-6 mb-4 mb-md-0">
+                <t t-call="website_sale.shop_product_carousel"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[@id='product_details']" position="replace">
+            <div class="col-md-6 col-xl-6" id="product_details">
+                <h1 itemprop="name" t-field="product.name">Product Name</h1>
+                <span itemprop="url" style="display:none;" t-esc="product.website_url"/>
+                <form t-if="product._is_add_to_cart_possible()" action="/shop/cart/update" method="POST" class="js_hbb_json_cart">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="js_product js_main_product">
+                        <t t-placeholder="select">
+                            <input type="hidden" class="product_id" name="product_id" t-att-value="product_variant.id"/>
+                            <input type="hidden" class="product_template_id" name="product_template_id" t-att-value="product.id"/>
+                            <t t-if="combination" t-call="sale.variants">
+                                <t t-set="ul_class" t-value="'flex-column'"/>
+                                <t t-set="parent_combination" t-value="None"/>
+                            </t>
+                            <t t-else="">
+                                <ul class="d-none js_add_cart_variants hbb_product_variants" t-att-data-attribute_exclusions="{'exclusions: []'}"/>
+                            </t>
+                        </t>
+                        <hr t-if="product.description_sale"/>
+                        <div>
+                            <p t-field="product.description_sale" class="text-muted mt-3" placeholder="A short description that will also appear on documents."/>
+                            <div id="product_attributes_simple">
+                                <hr t-if="sum([(1 if len(l.value_ids)==1 else 0) for l in product.attribute_line_ids])"/>
+                                <p class="text-muted">
+                                    <t t-set="single_value_attributes" t-value="product.valid_product_template_attribute_line_ids._prepare_single_value_for_display()"/>
+                                    <t t-foreach="single_value_attributes" t-as="attribute">
+                                        <span t-field="attribute.name"/>
+:
+                                        <t t-foreach="single_value_attributes[attribute]" t-as="ptal">
+                                            <span t-field="ptal.product_template_value_ids._only_active().name"/>
+                                            <t t-if="not ptal_last">,</t>
+                                        </t>
+                                        <br/>
+                                    </t>
+                                </p>
+                            </div>
+                        </div>
+                        <hr/>
+                        <t t-call="website_sale.product_price"/>
+                        <p t-if="True" class="css_not_available_msg alert alert-warning">This combination does not exist.</p>
+                        <hr/>
+                        <a role="button" id="add_to_cart" class="btn btn-primary btn-lg mt16 js_check_product d-block d-sm-inline-block btn-primary" href="#">
+                            <i class="fa fa-plus"/>
+                                Add to cart
+                        </a>
+                        <div id="product_option_block"/>
+                    </div>
+                </form>
+                <p t-elif="not product.active" class="alert alert-warning">This product is no longer available.</p>
+                <p t-else="" class="alert alert-warning">This product has no valid combination.</p>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="add_website_product_item" active="True" inherit_id="bi_website_add_product.add_website_product_item" customize_show="True" name="Dynamic Add To Cart">
+        <xpath expr="//form[@action='/shop/cart/update/product']" method="post" position="replace">
+            <form action="/shop/cart/update/product" method="get" class="m-0 card oe_product_cart js_hbb_json_cart d-flex flex-row flex-md-column pb-md-0" t-att-data-publish="product.website_published and 'on' or 'off'" itemscope="itemscope" itemtype="http://schema.org/Product">
+                <t t-set="product" t-value="product"/>
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <input type="hidden" name="popup_prdt_id" t-att-value="product.id" />
+                <t t-set="image_holder" t-value="product._get_image_holder()"/>
+                <div class="col-5 col-md-12 p-0 cst-ratio-box">
+                    <span t-field="image_holder.image_1920" t-options="{'widget': 'image', 'preview_image': 'image_1920'}" class="d-flex flex-column justify-content-start align-items-center js_hbb_show_popup content overfow-hidden"></span>
+                    <div style="text-align: left;font-family: 'Montserrat';color: #005bc9;" class="m-0 mb-md-3 d-block d-md-none position-absolute bg-white text-center bottom-0 w-100">
+                        <span t-if="product_id" t-esc="product_id['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                        <p class="m-0">
+                            <del t-attf-class="text-danger mr-2 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                            <span t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                            <span itemprop="price" style="display:none;" t-esc="combination_info['price']"/>
+                            <span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name"/>
+                        </p>
+                    </div>
+                </div>
+                <div class="col pl-2 pr-0 p-md-0 d-flex flex-column">
+                    <div class="card-body p-0">
+                        <h5 class="card-title fw-bold m-0 py-2" itemprop="name"><t t-esc="product.name"/></h5>
+                        <div class="oe_subdescription" contenteditable="false">
+                            <div itemprop="description" t-field="product.description_sale"/>
+                        </div>
+                    </div>
+                    <div class="card-footer p-0">
+                        <div style="text-align: left;font-family: 'Montserrat';color: #005bc9;" class="m-0 mb-md-3 d-none d-md-block">
+                            <span t-if="product_id" t-esc="product_id['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                            <p class="m-0">
+                                <del t-attf-class="text-danger mr-2 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                <span t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                <span itemprop="price" style="display:none;" t-esc="combination_info['price']"/>
+                                <span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name"/>
+                            </p>
+                        </div>
+                        <div name="dynamic_add_to_cart" class="dynamic_add_to_cart js_product">
+                            <t t-set="products" t-value="website.sudo().add_website_product(product.product_variant_ids[0].id)"/>
+                            <t t-set="combination" t-value="product._get_first_possible_combination()"/>
+                            <t t-set="combination_info" t-value="product._get_combination_info(combination, add_qty=add_qty or 1, pricelist=pricelist)"/>
+                            <t t-set="product_variant" t-value="product.env['product.product'].browse(combination_info['product_id'])"/>
+                            <input type="hidden" class="product_id" name="product_id" t-att-value="product_variant.id" />
+                            <input type="hidden" class="product_template_id" name="product_template_id" t-att-value="product.id" />
+                        </div>
+                        <div class="d-flex">
+                            <a role="button" href="#" id="add_to_cart" class="d-flex align-items-center justify-content-center px-1 py-1 w-50 p-0 btn btn-primary btn-xs hbb_btn_add_to_card mr-1" t-att-row="product.product_variant_ids[0].id">Add
+                            </a>
+                            <a role="button" t-att-href="product_href" class="d-flex align-items-center justify-content-center px-1 py-1 w-50 p-0 btn btn-secondary btn-xs hbb_btn_view_more ml-1" t-att-row="product.product_variant_ids[0].id">See more
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="o_wsale_product_btn"/>
+            </form>
+        </xpath>
+    </template>
+
+    <template id="login" active="True" inherit_id="web.login" name="Custom Login">
+        <xpath expr="//div[hasclass('field-login')]" position="before">
+            <h3 class="blue-color center-align fw-bold">Log in</h3>
+        </xpath>
+    </template>
+
+    <template id="login_update" active="True" inherit_id="web.login" name="Sign up - Reset Password">
+        <xpath expr="//button[@type='submit']" position="before">
+            <div class="justify-content-betwee mt-2 text-left small">
+                <p>
+                    <a t-if="signup_enabled" t-attf-href="/web/signup?{{ keep_query() }}" style="color:black">Don't have
+                        an account?<span> ></span>
+                    </a>
+                </p>
+
+                <p>
+                    <a t-if="reset_password_enabled" t-attf-href="/web/reset_password?{{ keep_query() }}"
+                       style="color:black">Reset password<span> ></span>
+                    </a>
+                </p>
+            </div>
+        </xpath>
+        <xpath expr="//button[@type='submit']" position="after">
+            <div class="social_login" style="margin-top:40px">
+                <a style="display:block; margin-bottom: 15px;background: White" class="social_login_button">
+                    <i class="fa fa-1x fa-facebook rounded-circle" style="color:#0057cf"></i>
+                    Log in with Facebook
+                </a>
+                <a style="display:block;background: White" class="social_login_button">
+                    <i class="fa fa-1x fa-google rounded-circle" style="color:#0057cf"></i>
+                    Log in with Google
+                </a>
+
+            </div>
+        </xpath>
+    </template>
+
+    <template id="sign_up" active="True" inherit_id="auth_signup.fields" name="Custom Login">
+        <xpath expr="//div[hasclass('field-login')]" position="before">
+            <h3 class="blue-color center-align">Create new account</h3>
+        </xpath>
+        <xpath expr="//label[@for='login']" position="replace">
+            <label class="fw-normal" for="login">Email</label>
+
+
+        </xpath>
+        <xpath expr="//div[hasclass('field-confirm_password')]" position="replace">
+            <div/>
+
+
+        </xpath>
+
+
+        <xpath expr="//div[hasclass('field-name')]" position="replace">
+            <div/>
+
+
+        </xpath>
+        <xpath expr="//div[hasclass('field-login')]" position="before">
+            <div class="form-group field-first-name">
+                <label class="fw-normal" for="name">First Name</label>
+                <input type="text" name="first-name" t-att-value="name" id="first-name"
+                       class="form-control form-control-sm"
+                       required="required" t-att-readonly="'readonly' if only_passwords else None"
+                       t-att-autofocus="'autofocus' if login and not only_passwords else None"/>
+            </div>
+            <div class="form-group field-last-name">
+                <label class="fw-normal" for="name">Last Name</label>
+                <input type="text" name="last-name" t-att-value="name" id="last-name"
+                       class="form-control form-control-sm" required="required"
+                       t-att-readonly="'readonly' if only_passwords else None"
+                       t-att-autofocus="'autofocus' if login and not only_passwords else None"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[@class='form-group field-password pt-2']//label" position="attributes">
+            <attribute name="class" separator=" " add="hh_password_cust"></attribute>
+        </xpath>
+    </template>
+
+    <template id="auth_signup" active="True" inherit_id="auth_signup.signup" name="Custom Sign Up">
+
+        <xpath expr="//button[@type='submit']" position="after">
+            <div class="social_login" style="margin-top:40px">
+                <a style="display:block;margin-bottom:15px;background: White" class="social_login_button">
+                    <i class="fa fa-1x fa-facebook rounded-circle" style="color:#0057cf"></i>
+                    Sign Up with Facebook
+                </a>
+                <a style="display:block;background: White" class="social_login_button">
+                    <i class="fa fa-1x fa-google rounded-circle" style="color:#0057cf"></i>
+                    Sign Up with Google
+                </a>
+
+            </div>
+        </xpath>
+
+    </template>
+
+    <template id="reset_password" active="True" inherit_id="auth_signup.reset_password" name="Reset Password">
+        <xpath expr="//div[hasclass('field-login')]" position="before">
+            <h3 class="blue-color center-align fw-normal">Reset password</h3>
+        </xpath>
+        <xpath expr="//label[@for='login']" position="replace">
+            <label class="fw-normal" for="login">Your email address</label>
+
+
+        </xpath>
+        <xpath expr="//button[@type='submit']" position="replace">
+            <button type="submit" class="btn btn-primary btn-block fw-normal">Send me link to reset password</button>
+        </xpath>
+
+    </template>
+
+</odoo>

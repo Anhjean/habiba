@@ -1,0 +1,130 @@
+.o_portal_security_body section:last-child {
+  display: none;
+}
+.oe_login_form,
+.oe_signup_form,
+.oe_reset_password_form {
+  max-width: 500px;
+  padding: 80px 40px;
+  background: #f7f7f7;
+  border-radius: 4px;
+
+  .form-group {
+    label {
+      font-size: 14px;
+    }
+
+    .form-control {
+      height: 48px;
+      border: none;
+      font-size: 18px;
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .btn-primary {
+    background: #f2c340;
+    color: #0057cf;
+    border: none;
+    margin-bottom: 8px;
+    padding: 8px 16px;
+    font-weight: 600;
+  }
+
+  a {
+    color: #0057cf;
+  }
+
+  .o_login_auth {
+    .o_auth_oauth_providers {
+      a {
+        border: none;
+        margin-bottom: 12px;
+        padding: 8px 16px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #333;
+        &:hover{
+          background-color: #fff;
+        }
+
+        i {
+          font-size: 24px;
+          margin-right: 16px;
+        }
+      }
+    }
+  }
+  .justify-content-between.mt-2.d-flex.small {
+    display: none !important;
+  }
+  .hh_password_cust {
+    font-weight: normal;
+  }
+}
+
+// .oe_login_form,
+// .oe_signup_form,
+// .oe_reset_password_form {
+//   max-width: 500px;
+//   padding: 80px 40px;
+//   background: #f7f7f7;
+//   border-radius: 4px;
+
+//   .form-group {
+//     label {
+//       font-size: 14px;
+//     }
+
+//     .form-control {
+//       height: 48px;
+//       border: none;
+//       font-size: 18px;
+//       outline: none;
+//       box-shadow: none;
+//     }
+//   }
+
+//   .btn-primary {
+//     background: #f2c340;
+//     color: #0057cf;
+//     border: none;
+//     margin-bottom: 8px;
+//     padding: 8px 16px;
+//     font-weight: 600;
+//   }
+
+//   a {
+//     color: #0057cf;
+//   }
+
+//   .o_login_auth {
+//     .o_auth_oauth_providers {
+//       a {
+//         border: none;
+//         margin-bottom: 12px;
+//         padding: 8px 16px;
+//         text-align: center;
+//         font-size: 14px;
+//         font-weight: 600;
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         color: #333;
+//         &:hover{
+//           background-color: #fff;
+//         }
+
+//         i {
+//           font-size: 24px;
+//           margin-right: 16px;
+//         }
+//       }
+//     }
+//   }
+// }

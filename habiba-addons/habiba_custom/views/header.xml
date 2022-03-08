@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- dynamic add menu item events-->
+        <record id="menu_habiba_11" model="website.menu">
+            <field name="name">FEEDBACK</field>
+            <field name="url">/feedback</field>
+            <field name="parent_id" ref="website.main_menu" />
+            <field name="sequence" type="int">1</field>
+        </record>
+
+        <record id="menu_habiba_aboutus" model="website.menu">
+            <field name="name">ABOUT US</field>
+            <field name="url">/aboutus</field>
+            <field name="parent_id" ref="website.main_menu" />
+            <field name="sequence" type="int">99</field>
+        </record>
+
+        <!-- hide default user icon -->
+        <template id="user_dropdown" active="True" inherit_id="portal.user_dropdown">
+            <xpath expr="//li[@t-if='is_connected']" position="replace"/>
+        </template>
+        <template id="user_sign_in" active="True" inherit_id="portal.placeholder_user_sign_in">
+            <xpath expr="//li" position="replace"/>
+        </template>
+
+        <!-- header language -->
+        <template id="language_selector" active="True" inherit_id="portal.language_selector">
+            <xpath expr="//div[@t-if='language_selector_visible']" position="replace">
+                <div t-attf-class="d-none d-lg-inline ml-auto js_language_selector #{_div_classes}" t-if="language_selector_visible">
+                    <t t-foreach="languages" t-as="lg">
+                        <a t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang_code=lg[0])" class="js_change_lang" t-att-data-url_code="lg[1]">
+                            <img t-att-src="lg[4]" class="hbb_lang_icon rounded-circle"/>
+                        </a>
+                    </t>
+                </div>
+                <div t-attf-class="position-relative d-lg-none ml-auto js_language_selector #{_div_classes} bg-transparent" t-if="language_selector_visible">
+                    <button class="btn btn-sm btn-outline-secondary border-0 dropdown-toggle bg-transparent" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <img t-att-src="active_lang[4]" class="hbb_lang_icon rounded-circle"/>
+                    </button>
+                    <div class="dropdown-menu px-1 border-top-0 bg-transparent" role="menu">
+                        <t t-foreach="languages" t-as="lg">
+                            <a t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang_code=lg[0])" class="dropdown-item js_change_lang p-0 pb-2" t-att-data-url_code="lg[1]">
+                                <img t-att-src="lg[4]" class="hbb_lang_icon rounded-circle"/>
+                            </a>
+                        </t>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+        <!-- hide default cart -->
+        <template id="header_cart_link" active="True" inherit_id="website_sale.header_cart_link">
+            <xpath expr="//li[last()]" position="replace"/>
+        </template>
+
+        <!-- center navbar -->
+        <template id="template_header_default_align_right" active="True" inherit_id="website.template_header_default_align_right">
+            <xpath expr="//t[@t-set='_nav_class']" position="replace">
+                <t t-set="_nav_class" t-value="'m-auto'"/>
+            </xpath>
+        </template>
+
+        <!-- cart customization -->
+        <template id="template_header_default_oe_structure_header_default_1" active="True" inherit_id="website.template_header_default_oe_structure_header_default_1" customize_show="True">
+            <xpath expr="//div[@id='oe_structure_header_default_1']" position="replace">
+                <t t-call="portal.language_selector"/>
+                <div class="px-2 d-none d-lg-block">
+                    <a groups="base.group_user,base.group_portal" href="/my/home" class="flex"><i class="cst-text-primary fa fa-user"/></a>
+                    <a groups="base.group_public" href="/web/login" class="flex"><i class="cst-text-primary fa fa-user-plus"></i></a>
+                </div>
+                <div class="d-flex position-relative" id="cart-div">
+                    <t t-set="website_sale_order" t-value="website.sale_get_order()" />
+                    <span t-attf-class="o_wsale_my_cart nav-item">
+                        <a href="/shop/cart" t-attf-class="nav-link px-2 position-relative">
+                            <i class="cst-text-primary fa fa-shopping-cart"/>
+                            <sup class="my_cart_quantity badge badge-primary" t-esc="website_sale_order and website_sale_order.cart_quantity or '0'" t-att-data-order-id="website_sale_order and website_sale_order.id or ''"/>
+                        </a>
+                    </span>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="navbar_nav" active="True" inherit_id="website.navbar_nav">
+            <xpath expr="//ul" position="attributes">
+                <attribute name="t-attf-class" separator=" " add="d-flex justify-content-center"></attribute>
+            </xpath>
+        </template>
+
+        <!-- whshlist -->
+        <template id="header_wishlist_link" active="True" inherit_id="website_sale_wishlist.header_wishlist_link">
+            <xpath expr="//a" position="attributes">
+                <attribute name="t-attf-class" separator=" " add="position-relative"></attribute>
+            </xpath>
+            <xpath expr="//li" position="attributes">
+                <attribute name="t-attf-class" separator=" " add="cst-w-fcontent"></attribute>
+            </xpath>
+        </template>
+
+        <!-- hamburger -->
+        <template id="navbar_toggler" active="True" inherit_id="website.navbar_toggler">
+            <xpath expr="//button" position="attributes">
+                <attribute name="t-attf-class" separator=" " add="order-6 ml-2"></attribute>
+                <attribute name="t-attf-class" separator=" " remove="#{_toggler_class}"></attribute>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

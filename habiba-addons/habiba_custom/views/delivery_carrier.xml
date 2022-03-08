@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="view_delivery_carrier_form_inherit" model="ir.ui.view">
+            <field name="name">view_delivery_carrier_form_inherit</field>
+            <field name="model">delivery.carrier</field>
+            <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='active']" position="after">
+                    <field name="x_is_pick_up" />
+                </xpath>
+            </field>
+        </record>
+
+        <!-- <template id="customer_order_delivery_date_time"
+            active="True" inherit_id="website_customer_order_delivery_date.website_sale_customer_order_delivery_date">
+            <xpath expr="//div[@class='form-group col-lg-12']//div[@class='row']" position="replace">
+                <div class="row">
+                    <div class='col-sm-4'>
+                        <div class="form-group">
+                            <label class="control-label" for="delivery_date">Delivery Date</label>
+                            <div class='input-group date' style="width: max-content;">
+                                <div class='d-flex form-control col-6'>
+                                    <input type='text' class="col p-0" id='delivery_date' readonly="True"/>
+                                    <span class="input-group-addon d-flex vertical-align-middle align-items-center" id='delivery_date_icon'>
+                                        <span class="fa fa-calendar"></span>
+                                    </span>
+                                </div>
+                                <div class="form-control col-4 d-flex align-items-center justify-content-between">
+                                    <div class="d-flex">
+                                        <select id="select_hour_str" aria-label=".form-select-lg example border-0">
+                                        </select><span class="">:</span>
+                                        <select id="select_time_str" aria-label=".form-select-lg example">
+                                        </select>
+                                    </div>
+                                    <span class="fa fa-clock"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="warning_note">
+                        <p class="d-none text-danger" id="closing_time_note"><t t-esc="res_company.closing_time_note"/></p>
+                        <p class="d-none text-danger" id="holiday_note"><t t-esc="res_company.holiday_note"/></p>
+                        <p class="d-none text-danger" id="emergency_note"><t t-esc="res_company.emergency_note"/></p>
+                        <input type='hidden' t-att-value="res_company.default_morning_opening_time" name='default_morning_opening_time'/>
+                        <input type='hidden' t-att-value="res_company.default_morning_closing_time" name='default_morning_closing_time'/>
+                        <input type='hidden' t-att-value="res_company.default_evening_opening_time" name='default_evening_opening_time'/>
+                        <input type='hidden' t-att-value="res_company.default_evening_closing_time" name='default_evening_closing_time'/>
+                    </div>
+                 </div>
+            </xpath>
+        </template> -->
+
+    </data>
+
+
+</odoo>

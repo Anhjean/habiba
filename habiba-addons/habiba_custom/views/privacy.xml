@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="privacy_policy" name="Privacy Policy">
+            <t t-call="website.layout">
+                <div class="container">
+                    <div id="wrap" class="oe_structure oe_empty">
+                        <h1>PRIVACY POLICY</h1>
+                      </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

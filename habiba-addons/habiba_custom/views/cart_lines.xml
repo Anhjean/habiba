@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="cart_lines" active="True" inherit_id="website_sale.cart_lines" name="Cart">
+            <xpath expr="//table//tr" position="replace">
+                <tr>
+                    <th class="cst-fs-small text-left">Product details</th>
+                    <th class="cst-fs-small text-center td-qty">Quantity</th>
+                    <th class="cst-fs-small text-left td-price">Price</th>
+                    <th class="cst-fs-small text-center td-action"></th>
+                </tr>
+            </xpath>
+            <xpath expr="//td[@colspan='2']" position="replace"/>
+            <xpath expr="//td[@align='center']" position="replace"/>
+            <xpath expr="//td[@class='td-product_name']" position="replace">
+                <td t-if="not line.product_id.product_tmpl_id"></td>
+                <td t-if="line.product_id.product_tmpl_id" class='py-1 d-flex align-items-center justify-content-start'>
+                    <div class="td-img col-2 p-0 d-flex justify-content-center">
+                        <span class="m-0" t-field="line.product_id.image_128" t-options="{'widget': 'image', 'qweb_img_responsive': False, 'class': 'o_image_64_max'}" />
+                    </div>
+                    <div class="col d-flex flex-column">
+                        <div>
+                            <t t-call="website_sale.cart_line_product_link">
+                                <strong t-field="line.name_short" />
+                            </t>
+                        </div>
+                        <!-- <div class="cst-fs-small pt-1">
+                            <t t-esc="line.product_id.description_sale"/>
+                        </div> -->
+                        <t t-call="website_sale.cart_line_description_following_lines">
+                            <t t-set="div_class" t-value="'d-none d-md-block'"/>
+                        </t>
+                    </div>
+                </td>
+            </xpath>
+            <xpath expr="//div[@class='js_cart_lines alert alert-info']" position="after">
+                <h2 id="mycart" class="fs-5 mb-0" style="'Montserrat', sans-serif;color: #0057cf;font-weight: bold">My cart</h2>
+            </xpath>
+            <!-- <xpath expr="//th[@class='td-img']" position="replace">
+                    <th class="td-img" style="display: block ruby">Product details</th>
+            </xpath>
+            <xpath expr="//table[@class='mb16 table table-striped table-sm js_cart_lines']" position="attributes">
+                <attribute name="class">mb16 table table-borderless table-sm js_cart_lines</attribute>
+            </xpath>
+             <xpath expr="//th[@class='text-center td-price']" position="replace">
+                    <th class="text-center td-price">Total</th>
+            </xpath>
+            <xpath expr="//th[@class='td-img']" position="attributes">
+                <attribute name="class">td-img colorperso</attribute>
+            </xpath>
+            <xpath expr="//th[@class='text-center td-qty']" position="attributes">
+                <attribute name="class">text-center td-qty colorperso</attribute>
+            </xpath>
+            <xpath expr="//th[@class='text-center td-price']" position="attributes">
+                <attribute name="class">text-center td-price colorperso</attribute>
+            </xpath>
+              -->
+        </template>
+
+        <template id="wizard_form" active="True" inherit_id="website_sale.wizard_checkout" name="Wizard">
+             <xpath expr="//div[@id='wizard-step10']" position="replace">
+                 <div id="wizard-step10" t-att-class="'progress-wizard-step %s' % (step == 10 and 'active' or step&gt;10 and 'complete' or 'disabled')">
+                    <div class="progress-wizard-bar d-none d-md-block"/>
+                    <span class="progress-wizard-dot d-none d-md-inline-block"/>
+                    <div id="mywizard10" class="text-center progress-wizard-steplabel">ORDER REVIEW</div>
+                </div>
+            </xpath>
+
+             <xpath expr="//div[@id='wizard-step20']" position="replace">
+                <div id="wizard-step20" t-att-class="'progress-wizard-step %s' % (step == 20 and 'active' or step&gt;20 and 'complete' or 'disabled')">
+                    <div class="progress-wizard-bar d-none d-md-block"/>
+                    <span class="progress-wizard-dot d-none d-md-inline-block"/>
+                <div id="mywizard20" class="text-center progress-wizard-steplabel">SHIPPING INFORMATION</div> 
+                </div>
+            </xpath>
+
+            <xpath expr="//div[@id='wizard-step40']" position="replace">
+                <div id="wizard-step40" t-att-class="'progress-wizard-step %s' % (step == 40 and 'active' or step&gt;40 and 'complete' or 'disabled')">
+                    <div class="progress-wizard-bar d-none d-md-block"/>
+                    <span class="progress-wizard-dot d-none d-md-inline-block"/>
+                    <div id="mywizard40" class="text-center progress-wizard-steplabel">CONFIRMATION</div>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="cust_login" active="True" inherit_id="web.login" name="Costum Login Page">
+            <xpath expr="//div[@class='form-group field-login']" position="replace">
+                <div class="form-group field-login">
+                    <label for="login" style="font-weight: normal !important">Email</label>
+                    <input type="text" name="login" t-att-value="login" id="login" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autofocus="autofocus" autocapitalize="off"/>
+                </div>
+            </xpath>
+            <xpath expr="//div[@class='form-group field-password']" position="replace">
+                <div class="form-group field-password">
+                    <label for="password" style="font-weight: normal !important">Password</label>
+                    <input type="password" name="password" id="password" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autocomplete="current-password" t-att-autofocus="'autofocus' if login else None" maxlength="4096"/>
+                </div>
+            </xpath>
+            <xpath expr="//button[@class='btn btn-link btn-sm btn-block']" position="attributes">
+                <attribute name="class">btn btn-link btn-sm btn-block d-none hh_super</attribute>
+            </xpath>
+
+        </template>
+
+        <template id ="cust_button" active="True" inherit_id="auth_signup.signup" name="Button">
+            <xpath expr="//a[@class='btn btn-link btn-sm']" position="attributes">
+                <attribute name='class'>btn btn-link btn-sm d-none hh_cust</attribute>
+            </xpath>          
+        </template>
+        
+    </data>
+</odoo>

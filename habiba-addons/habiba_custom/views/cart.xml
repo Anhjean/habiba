@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!-- <template id="cart_lines" active="True" inherit_id="website_sale.cart_lines" name="Shopping Cart Lines">
+            <xpath expr="//t[@t-call='website_sale.cart_line_product_link']" position="replace">
+                <h4>
+                    <t t-esc="line.name_short"/>
+                </h4>
+            </xpath>
+            <xpath expr="//div[hasclass('css_quantity')]//div[hasclass('input-group-prepend')]//i" position="before">
+                <span class="hbb_qty_sub">-</span>
+            </xpath>
+            <xpath expr="//div[hasclass('css_quantity')]//div[hasclass('input-group-prepend')]//i" position="attributes">
+                <attribute name="class" separator=" " add="d-none"></attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('css_quantity')]//div[hasclass('input-group-append')]//i" position="before">
+                <span class="hbb_qty_add">+</span>
+            </xpath>
+            <xpath expr="//div[hasclass('css_quantity')]//div[hasclass('input-group-append')]//i" position="attributes">
+                <attribute name="class" separator=" " add="d-none"></attribute>
+            </xpath>
+        </template> -->
+
+        <template id="cart" active="True" inherit_id="website_sale.cart" name="Shopping Cart">
+            <xpath expr="//div[hasclass('oe_website_sale')]" position="attributes">
+                <attribute name="class" separator=" " add="hbb_checkout_page"></attribute>
+            </xpath>
+
+            <xpath expr="//div[@class='d-xl-none mt8']" position="replace">
+                <a role="button" t-if="website_sale_order and website_sale_order.website_order_line" class="btn w-100 w-md-50 w-xl-100 btn-primary d-flex mb-3 m-auto" href="/shop/checkout?express=1">
+                    <span class="font-weight-bold m-auto">Process Checkout</span>
+                </a>
+            </xpath>
+
+            <xpath expr="//a[@href='/shop']" position="replace">
+            </xpath>
+
+            <xpath expr="//div[hasclass('oe_website_sale')]" position="attributes">
+                <attribute name="class" separator=" " add="hbb_checkout_page"></attribute>
+            </xpath>
+
+            <xpath expr="//a[@href='/shop/checkout?express=1']" position="replace">
+            </xpath>
+        </template>
+
+        <template id="total" active="True" inherit_id="website_sale.total">
+            <xpath expr="//tr[@id='empty']" position="replace"/>
+
+            <xpath expr="//tr[@id='order_total_untaxed']" position="attributes">
+                <attribute name="class">order-1 d-flex justify-content-between</attribute>
+            </xpath>
+            <xpath expr="//tr[@id='order_total_untaxed']//td[@class='text-right border-0']" position="replace">
+                <td class="text-right font-weight-bold border-0">Total order</td>
+            </xpath>
+
+            <xpath expr="//tr[@id='order_total_taxes']" position="attributes">
+                <attribute name="class">order-4 d-flex justify-content-between</attribute>
+            </xpath>
+            <xpath expr="//tr[@id='order_total_taxes']//td[@class='text-right border-0']" position="replace">
+                <td class="text-right font-weight-bold border-0">VAT<span>%</span></td>
+            </xpath>
+
+            <xpath expr="//tr[@id='order_total']" position="attributes">
+                <attribute name="class">order-5 d-flex justify-content-between</attribute>
+            </xpath>
+            <xpath expr="//tr[@id='order_total']//td[@class='text-right']" position="replace">
+                <td class="text-right font-weight-bold">Grand total</td>
+            </xpath>
+        </template> 
+
+        <!-- <template id="cart_delivery" active="True" inherit_id="website_sale_delivery.cart_delivery">
+            <xpath expr="//tr[@id='order_delivery']" position="attributes">
+                <attribute name="class">order-2 d-flex justify-content-between</attribute>
+            </xpath>
+            <xpath expr="//td[@class='text-right border-0 text-muted']" position="replace">
+                <td class="text-right font-weight-bold border-0 text-muted" title="Delivery will be updated after choosing a new delivery method">Shipping</td>
+            </xpath>
+        </template>
+
+        <template id="reduction_code" active="True" inherit_id="website_sale.reduction_code">
+            <xpath expr="//a[@class='show_coupon']" position="replace">
+            </xpath>
+        </template>
+
+        <template id="suggested_products_list" active="True" inherit_id="website_sale.suggested_products_list">
+            <xpath expr="//h5" position="replace">
+                <h5 class="pt-5 pb-4 js_cart_lines font-weight-bold cst-text-primary" t-if="suggested_products">Add more item</h5>
+            </xpath>
+            <xpath expr="//td[@class='w-25 text-center']" position="replace">
+                <td class="text-center">
+                    <input class="js_quantity" name="product_id" t-att-data-product-id="product.id" type="hidden"/>
+                    <a role="button" class="btn cst-bg-secondary cst-text-primary js_add_suggested_products px-4">
+                        <strong>Add</strong>
+                    </a>
+                </td>
+            </xpath>
+            <xpath expr="//div[@class='text-muted d-none d-md-block']" position="replace">
+            </xpath>
+            <xpath expr="//table[@id='suggested_products']//tbody" position="attributes">
+                <attribute name="class">d-flex flex-nowrap align-items-center overflow-hidden col-12</attribute>
+            </xpath>
+            <xpath expr="//table[@id='suggested_products']//tbody//tr" position="attributes">
+                <attribute name="class">col-4 d-flex flex-column align-items-center text-center</attribute>
+            </xpath>
+        </template> -->
+
+        <template id="hbb_cart_summary">
+            <div class="bg-light p-4">
+                <h4 class="m-auto text-center pb-4 cst-text-primary">Order Summary</h4>
+                <div class="toggle_summary_div">
+                    <div class="hbb_menu_list mb-4">
+                        <h6 class="fw-bold">Menu items(<t t-esc="len(website_sale_order.website_order_line)"/>)</h6>
+                        <table class="w-100">
+                            <tbody>
+                                <tr t-foreach="website_sale_order.website_order_line" t-as="line">
+                                    <td class='td-product_name' t-if="line.product_id.product_tmpl_id">
+                                        <t t-esc="line.name_short" />
+                                    </td>
+                                    <td class="text-right td-price">
+                                        <span t-field="line.price_reduce_taxexcl" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}" groups="account.group_show_line_subtotals_tax_excluded" />
+                                        <span t-field="line.price_reduce_taxinc" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}" groups="account.group_show_line_subtotals_tax_included" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <t t-call="website_sale.total">
+                        <t t-set='redirect' t-value="redirect or '/shop/payment'"></t>
+                    </t>
+                </div>
+            </div>
+        </template>
+
+
+        <template id="short_cart_summary" active="True" inherit_id="website_sale.short_cart_summary" name="Short Cart right column">
+            <xpath expr="//div[@class='card-body']//div" position="before">
+                <table class="w-100 d-none d-xl-table">
+                    <tbody>
+                        <tr t-foreach="website_sale_order.website_order_line" t-as="line">
+                            <td class='td-product_name' t-if="line.product_id.product_tmpl_id">
+                                <t t-esc="line.name_short" />
+                            </td>
+                            <td class="text-right td-price">
+                                <span t-field="line.price_reduce_taxexcl" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}" groups="account.group_show_line_subtotals_tax_excluded" />
+                                <span t-field="line.price_reduce_taxinc" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}" groups="account.group_show_line_subtotals_tax_included" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </xpath>
+            <xpath expr="//a" position="attributes">
+                <attribute name="class" separator=" " remove="d-xl-inline-block"></attribute>
+            </xpath>
+        </template>
+
+        <template id="cart_summary" active="True" inherit_id="website_sale.cart_summary" name="Cart right column">
+            <xpath expr="//div[hasclass('card')]" position="replace">
+                <div class="card">
+                    <div class="card-body">
+                        <t t-call="habiba_custom.hbb_cart_summary"/>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+        <!-- hide back to cart button -->
+        <!-- <template id="payment_tokens_list" active="True" inherit_id="payment.payment_tokens_list">
+            <xpath expr="//div[@t-if='back_button_txt']" position="replace"/>
+            <xpath expr="//div[@class='float-right mt-2']" position="attributes">
+                <attribute name="class" separator=" " add="w-100"></attribute>
+            </xpath>
+        </template> -->
+
+        <template id="payment" active="True" inherit_id="website_sale.payment">
+            <xpath expr="//div[@id='payment_method']" position="attributes">
+                <attribute name="t-att-style">'display: none!important' if not deliveries and delivery_has_storable else ''</attribute>
+            </xpath>
+            <xpath expr="//div[@class='card']" position="before">
+                <h2 id="shipping" class="fs-5 mb-0" style="'Montserrat', sans-serif;color: #0057cf;font-weight: bold">Shipping information:</h2>
+            </xpath>
+            <xpath expr="//t[@t-set='submit_txt']" position="replace">
+                <t t-set="submit_txt">Confirm Order</t>
+            </xpath>
+            <xpath expr="//div[hasclass('col-xl-auto')]" position="replace">
+                <div class="col-12 col-xl-4 order-xl-2">
+                    <t t-call="website_sale.cart_summary"/>
+                </div>
+            </xpath>
+            <xpath expr="//div[@class='card']" position="replace">
+                <div class="card">
+                    <div class="card-body d-flex px-0" id="shipping_and_billing">
+                        <t t-set="same_shipping" t-value="bool(order.partner_shipping_id==order.partner_id or only_services)" />
+                        <div>
+                            <span t-esc='order.partner_id' t-options="dict(widget='contact', fields=['address','phone'], no_marker=True, separator=', ')" class="address-inline pr-2"/>
+                        </div>
+                        <div t-if="not same_shipping and not only_services" groups="sale.group_delivery_invoice_address">
+                            <span t-esc='order.partner_shipping_id' t-options="dict(widget='contact', fields=['address','phone'], no_marker=True, separator=', ')"  class="address-inline"/>
+                        </div>
+                        <a class='float-right no-decoration' href='/shop/checkout'><i class="fa fa-edit"/> Edit</a>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="confirmation" active="True" inherit_id="website_sale.confirmation">
+            <xpath expr="//div[hasclass('oe_website_sale')]" position="replace">
+                <div class="container oe_website_sale py-2 hbb_checkout_page">
+                    <div class="row">
+                        <div class="col-12">
+                            <t t-call="website_sale.wizard_checkout">
+                                <t t-set="step" t-value="40"/>
+                            </t>
+                        </div>
+                        <div class="hbb_thank_content text-center col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 pt-3">
+                            <h4 class="cst-text-primary fw-bold">Thank you!</h4>
+                            <p>Your order will be on its way shortly</p>
+                            <t t-call="website_sale.payment_confirmation_status"/>
+                            <div class="hbb_box">
+                                <h6 class="fw-bold m-0">Your order number </h6>
+                                <p>
+                                    <span t-esc='order.reference'/>
+                                </p>
+                            </div>
+                            <div class="hbb_box">
+                                <h6 class="fw-bold m-0">Your recipient info</h6>
+                                <p class="m-0">
+                                    <t t-esc="order.partner_id.name"/>
+                                </p>
+                                <p class="m-0">
+                                    <t t-esc='order.partner_shipping_id.street'/>
+                                </p>
+                                <p>
+                                    <t t-esc='order.partner_shipping_id.phone'/>
+                                </p>
+                            </div>
+                            <div class="hbb_box">
+                                <p class="m-0">For further support please dial <t t-esc="res_company.phone"/> </p>
+                                <p>
+                                    <a t-attf-href="/my/orders/#{order.id}" title="Order detail">Click here </a>to track your order</p>
+                            </div>
+                            <a href="/feedback" title="Give us your feedback" class="btn btn-primary px-5 mt-3">Give us your feedback</a>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+
+
+        <template id="checkout" active="True" inherit_id="website_sale.checkout">
+            <xpath expr="//div[hasclass('oe_website_sale')]" position="replace">
+                <div class="container oe_website_sale py-2 hbb_checkout_page">
+                    <t t-set="same_shipping" t-value="bool(order.partner_shipping_id==order.partner_id or only_services)" />
+                    <div class="row">
+                        <div class="col-12">
+                            <t t-call="website_sale.wizard_checkout">
+                                <t t-set="step" t-value="20" />
+                            </t>
+                        </div>
+                        <div class="col-12 col-xl-8 oe_cart">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h3 class="o_page_header mt8">Billing Address</h3>
+                                </div>
+                                <div class="col-lg-6 one_kanban">
+                                    <t t-call="website_sale.address_kanban">
+                                        <t t-set='contact' t-value="order.partner_id"/>
+                                        <t t-set='selected' t-value="1"/>
+                                        <t t-set='readonly' t-value="1"/>
+                                    </t>
+                                </div>
+                            </div>
+                            <t t-if="not only_services" groups="sale.group_delivery_invoice_address">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <h3 class="o_page_header mt16 mb4">Shipping Address</h3>
+                                    </div>
+                                </div>
+                                <div class="row all_shipping">
+                                    <div class="col-lg-12">
+                                        <div class="row mt8">
+                                            <div class="col-md-12 col-lg-12 one_kanban">
+                                                <form action="/shop/address" method="post" class=''>
+                                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                                                    <a role="button" href="#" class='a-submit btn btn-secondary mb16 btn-block hbb_btn_yellow'>
+                                                        <i class="fa fa-plus-square"/>
+                                                        <span>Add an address</span>
+                                                    </a>
+                                                </form>
+                                            </div>
+                                            <t t-foreach="shippings" t-as="ship">
+                                                <div class="col-md-12 col-lg-6 one_kanban">
+                                                    <t t-call="website_sale.address_kanban">
+                                                        <t t-set="actual_partner" t-value="order.partner_id" />
+                                                        <t t-set='contact' t-value="ship"/>
+                                                        <t t-set='selected' t-value="order.partner_shipping_id==ship"/>
+                                                        <t t-set='readonly' t-value="bool(len(shippings)==1)"/>
+                                                        <t t-set='edit_billing' t-value="bool(ship==order.partner_id)"/>
+                                                    </t>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                            <div class="d-flex justify-content-between mt-3">
+                                <a role="button" href="/shop/confirm_order" class="btn btn-primary mb32 hbb_btn_yellow w-100 mt-3">
+                                    <span>Confirm</span>
+                                    <i class="fa fa-chevron-right"/>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-xl-4 d-none d-md-block">
+                            <t t-call="website_sale.cart_summary">
+                                <t t-set="redirect" t-valuef="/shop/checkout"/>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+
+        <template id="address" active="True" inherit_id="website_sale.address">
+            <xpath expr="//div[hasclass('col-xl-auto')]" position="attributes">
+                <attribute name="class" separator=" " remove="col-xl-auto"></attribute>
+                <attribute name="class" separator=" " add="col-xl-4"></attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('form-row')]" position="replace">
+                <div class="form-row">
+                    <div t-attf-class="form-group #{error.get('name') and 'o_has_error' or ''} col-lg-12 div_name">
+                        <label class="cst-text-primary col-form-label" for="name">Name</label>
+                        <input type="text" name="name" t-attf-class="form-control #{error.get('name') and 'is-invalid' or ''}" t-att-value="'name' in checkout and checkout['name']" />
+                    </div>
+                    <div class="w-100"/>
+                    <t t-if="mode[1] == 'billing'">
+                        <div t-attf-class="form-group #{error.get('email') and 'o_has_error' or ''} col-lg-12" id="div_email">
+                            <label class="cst-text-primary col-form-label" for="email">Email</label>
+                            <input type="email" name="email" t-attf-class="form-control #{error.get('email') and 'is-invalid' or ''}" t-att-value="'email' in checkout and checkout['email']" />
+                        </div>
+                    </t>
+                    <div t-attf-class="form-group #{error.get('phone') and 'o_has_error' or ''} col-lg-12" id="div_phone">
+                        <label class="cst-text-primary col-form-label" for="phone">Phone number</label>
+                        <input type="tel" name="phone" t-attf-class="form-control #{error.get('phone') and 'is-invalid' or ''}" t-att-value="'phone' in checkout and checkout['phone']" />
+                    </div>
+                    <div class="w-100"/>
+                    <div t-attf-class="form-group #{error.get('street') and 'o_has_error' or ''} col-lg-12 div_street">
+                        <label class="cst-text-primary col-form-label" for="street">House number street, ward</label>
+                        <input type="text" name="street" t-attf-class="form-control #{error.get('street') and 'is-invalid' or ''}" t-att-value="'street' in checkout and checkout['street']" />
+                    </div>
+                    <div t-attf-class="form-group #{error.get('street2') and 'o_has_error' or ''} col-lg-12 div_street2">
+                        <label class="cst-text-primary col-form-label" for="street2">Adress street</label>
+                        <input type="text" name="street2" t-attf-class="form-control #{error.get('street2') and 'is-invalid' or ''}" t-att-value="'street2' in checkout and checkout['street2']" />
+                    </div>
+                    <div class="w-100"/>
+                    <div t-attf-class="form-group #{error.get('city') and 'o_has_error' or ''} col-md-12 div_city">
+                        <label class="cst-text-primary col-form-label" for="city">District </label>
+                        <input type="text" name="city" t-attf-class="form-control #{error.get('city') and 'is-invalid' or ''}" t-att-value="'city' in checkout and checkout['city']" />
+                    </div>
+                    <div class="w-100"/>
+                    <div t-attf-class="form-group #{error.get('country_id') and 'o_has_error' or ''} col-lg-12 div_country">
+                        <label class="cst-text-primary col-form-label" for="country_id">Country</label>
+                        <select id="country_id" name="country_id" t-attf-class="form-control #{error.get('country_id') and 'is-invalid' or ''}" t-att-mode="mode[1]">
+                            <option value="">Country...</option>
+                            <t t-foreach="countries" t-as="c">
+                                <option t-att-value="c.id" t-att-selected="c.name == 'Vietnam'">
+                                    <t t-esc="c.name" />
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="w-100"/>
+                    <t t-if="mode == ('new', 'billing') and not only_services">
+                        <div class="col-lg-12">
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" id='shipping_use_same' class="mr8" name='use_same' value="1" checked='checked'/>Ship to the same address
+                                <span class='ship_to_other text-muted' style="display: none">&amp;nbsp;(<i>Your shipping address will be requested later) </i></span>
+                                </label>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </xpath>
+            <xpath expr="//form[hasclass('checkout_autoformat')]//div[hasclass('justify-content-between')]//a[hasclass('a-submit')]" position="attributes">
+                <attribute name="class" separator=" " add="btn-hbb"></attribute>
+            </xpath>
+        </template>
+
+    <template id="website_sale_delivery.payment_delivery_methods">
+        <label class="label-optional hbb_container" t-att-data-pickup="delivery.x_is_pick_up">
+            <input t-att-value="delivery.id" t-att-id="'delivery_%i' % delivery.id" type="radio" name="delivery_type" t-att-checked="order.carrier_id and order.carrier_id.id == delivery.id and 'checked' or False" t-att-class="'d-none' if delivery_nb == 1 else ''"/>
+            <span class="hbb_checkmark circle"></span>
+            <span t-field="delivery.name"></span>
+        </label>
+        <t t-if="delivery.x_is_pick_up">
+            <div class="hbb_pickup_popup">
+                <div t-field="delivery.website_description" class="text-muted mt8 description"/>
+                <t t-if="website and not website.is_customer_order_delivery_date_feature">
+                    <div class='date'>
+                        <label>Pick-up date time:</label>
+                        <input type='text' id='delivery_date'/>
+                    </div>
+                    <div class="time d-flex align-items-center justify-content-between">
+                        <label class="m-0">Time:</label>
+                        <div class="d-flex">
+                            <select id="select_hour_str" aria-label=".form-select-lg example border-0">
+                            </select><span class="">:</span>
+                            <select id="select_time_str" aria-label=".form-select-lg example">
+                            </select>
+                        </div>
+                        <span class="fa fa-clock"></span>
+                    </div>
+                </t>
+            </div>
+            <div id="warning_note">
+                <p class="d-none text-danger" id="closing_time_note"><t t-esc="res_company.closing_time_note"/></p>
+                <p class="d-none text-danger" id="holiday_note"><t t-esc="res_company.holiday_note"/></p>
+                <p class="d-none text-danger" id="emergency_note"><t t-esc="res_company.emergency_note"/></p>
+                <input type='hidden' t-att-value="res_company.default_morning_opening_time" name='default_morning_opening_time'/>
+                <input type='hidden' t-att-value="res_company.default_morning_closing_time" name='default_morning_closing_time'/>
+                <input type='hidden' t-att-value="res_company.default_evening_opening_time" name='default_evening_opening_time'/>
+                <input type='hidden' t-att-value="res_company.default_evening_closing_time" name='default_evening_closing_time'/>
+            </div>
+        </t>
+
+        <t t-if="delivery.website_description and not delivery.x_is_pick_up">
+            <div t-field="delivery.website_description" class="text-muted mt8 description"/>
+        </t>
+    </template>
+
+    <!-- <template id="website_customer_order_delivery_date.website_sale_customer_order_delivery_date" active="True" inherit_id="website_sale.payment">
+        <xpath expr="//div[@id='shipping_and_billing']" position="after">
+            <t t-if="website and not website.is_customer_order_delivery_comment_feature">
+                <textarea class="form-control hbb_text_box" id="delivery_comment" placeholder="Note for your order"></textarea>
+            </t>
+        </xpath>
+    </template> -->
+
+</data>
+</odoo>

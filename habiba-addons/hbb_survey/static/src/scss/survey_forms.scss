@@ -1,0 +1,145 @@
+.o_survey_form,
+.o_survey_print,
+.o_survey_session_manage,
+.o_survey_quick_access{
+
+  max-width: 800px;
+
+  .hbb_breadcrumb{
+    .breadcrumb-item{
+      span{
+        color: #0059d0;
+      }
+    }
+  }
+
+  .o_survey_main_title{
+    font-size: 2rem;
+    color: #0059d0;
+    font-weight: bold;
+  }
+
+  .o_survey_title{
+    color: #0059d0 !important;
+    font-weight: bold;
+  }
+
+  .btn-primary{
+    background-color: #f2c340 !important;
+    color: #0059d0 !important;
+    border: none;
+    font-weight: 600;
+    width: 100%;
+  }
+
+  .o_survey_form_date{
+    div[data-toggle='datetimepicker']{
+      top: 50%;
+      right: 8px;
+      transform: translateY(-50%);
+      div{
+        color: #333 !important;
+      }
+    }
+  }
+
+  .hbb_title{
+    color: #0059d0;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .hbb_text_box{
+    border-bottom: none !important;
+    background-color: #f4f4f4 !important;
+    border-radius: 6px !important;
+    padding: 16px !important;
+    height: auto;
+    color: #444 !important;
+    font-size: 18px;
+  }
+
+  textarea.hbb_text_box{
+    min-height: 120px !important;
+  }
+
+  table.hbb_matrix_box{
+    th, td{
+      background: #2097f3 !important;
+      vertical-align: middle;
+    }
+    .hbb_table_container {
+      position: relative;
+      padding-left: 35px !important;
+      margin-bottom: 12px !important;
+      cursor: pointer !important;
+      font-size: 18px;
+      font-weight: 500;
+      user-select: none !important;
+      box-shadow: none !important;
+      border: none !important;
+      background: #1e98f31c !important;
+      color: #333 !important;
+
+      .o_survey_choice_key{
+        float: right !important
+      }
+  
+      input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+      }
+  
+      .hbb_checkmark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 25px;
+        width: 25px;
+        transform: translate(-50%, -50%);
+        border: 1px solid #333;
+        &.circle{
+          border-radius: 50%;
+          &:after{
+            border-radius: 50%;
+          }
+        }
+        &:after{
+          content: "";
+          position: absolute;
+          display: none;
+          top: 3px;
+          left: 3px;
+          width: 17px;
+          height: 17px;
+          background: #2097f3;
+        }
+      }
+      &:hover{
+        input ~ .hbb_checkmark {
+          background-color: #fff;
+        }
+        .hbb_checkmark:after {
+          display: block;
+       }
+      }
+      input:checked ~ .hbb_checkmark {
+        background-color: #fff;
+      }
+      input:checked ~ .hbb_checkmark:after {
+        display: block;
+      }
+      i{
+        display: none !important;
+        visibility: hidden;
+        opacity: 0;
+      }
+    }
+  }
+}
+
+#wrapwrap{
+  .o_survey_brand_message{
+    display: none !important;
+  }
+}

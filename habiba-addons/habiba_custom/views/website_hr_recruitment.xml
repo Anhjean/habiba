@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- change the link -->
+        <template id="recruitment_index" active="True" inherit_id="website_hr_recruitment.index">
+            <xpath expr="//div[@id='wrap']" position="replace">
+                <div id="wrap" class="o_website_hr_recruitment_jobs_list bg-white container col-8">
+                    <div class="oe_structure">
+                        <div class="col-lg-12 px-5">
+                            <h3 class="cst-text-primary fw-bold mt-4 mb-3">Our Job Offers</h3>
+                            <p style="font-size: 15px;">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Varius morbi enim nunc
+                                faucibus. Donec et odio pellentesque diam volutpat commodo sed. Morbi
+                                blandit cursus risus at ultrices mi tempus imperdiet nulla. Accumsan tortor
+                                posuere ac ut consequat semper. In cursus turpis massa tincidunt dui ut
+                                ornare. Morbi non arcu risus quis varius quam quisque id. Pulvinar
+                                pellentesque habitant morbi tristique senectus et netus et malesuada.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="container oe_website_jobs">
+                        <div class="col-lg d-flex flex-wrap mx-3" style="line-height:normal;" id="jobs_grid">
+                            <div t-if="not jobs">
+                                <div class="text-center text-muted">
+                                    <h3 class="css_editable_hidden"><a t-attf-href="/contactus">Contact us</a> for job opportunities.</h3>
+                                    <h4 groups="hr_recruitment.group_hr_recruitment_manager">
+                                        Create new job pages from the <strong><i>+New</i></strong> top-right button.
+                                    </h4>
+                                </div>
+                            </div>
+                            <a t-foreach="jobs" t-as="job" t-attf-href="/jobs/apply/#{job.id}" t-attf-class="col-6 p-3">
+                                <div class="card card-default mb32 px-5 py-5">
+                                    <div class="card-body" t-att-data-publish="job.website_published and 'on' or 'off'">
+                                        <span t-if="not job.website_published" class="badge badge-danger mb8 p-2">unpublished</span>
+                                        <h5 class="mt0 mb4 text-black fw-bold">
+                                            <span t-field="job.name"/>
+                                        </h5>
+                                        <div style="font-size: 15px;" class="o_job_infos mt16">
+                                            <div class="d-flex mb-3">
+                                                <span t-field="job.address_id" t-options='{"widget": "contact","fields": ["address"],"no_tag_br": True}'/>
+                                            </div>
+                                            <div class="deadline">
+                                                <span t-field="job.write_date"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+
+        <!-- change the link -->
+        <template id="recruitment_apply" active="True" inherit_id="website_hr_recruitment.apply">
+            <xpath expr="//div[@id='wrap']" position="replace">
+                <div id="wrap" class="o_website_hr_recruitment_jobs_list bg-white container col-7 mb-5">
+                    <div class="oe_structure">
+                        <div class="col-lg-12 px-5">
+                            <h3 class="cst-text-primary fw-bold mt-4 mb-3"><span t-field="job.name"/></h3>
+                            <h6 class="fw-bold mb-2 mt-4">Job description</h6>
+                            <p style="font-size: 15px;"><t t-esc="job.description"/></p>
+                        </div>
+                    </div>
+                    <span class="hidden" data-for="hr_recruitment_form" t-att-data-values="{'department_id': job and job.department_id.id or '', 'job_id': job and job.id or ''}" />
+                    <div class="container oe_website_jobs px-2">
+                        <section id="forms" class="s_website_form" data-vcss="001" data-snippet="s_website_form">
+                            <div class="col-lg d-flex flex-wrap mx-3 px-4 mt-3" style="line-height:normal;" id="jobs_grid">
+                                <h6 class="fw-bold mb-4">Application form</h6>
+                                <form id="hr_recruitment_form" action="/website_form/" method="post" enctype="multipart/form-data" class="o_mark_required bg-light px-5 py-4 rounded" data-mark="*" data-model_name="hr.applicant" data-success-mode="redirect" data-success-page="/job-thank-you" hide-change-model="true">
+                                    <div class="s_website_form_rows row s_col_no_bgcolor py-2">
+                                        <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                            <div class="s_col_no_resize s_col_no_bgcolor">
+                                                <label class="px-0 col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment1">
+                                                    <span class="s_website_form_label_content cst-text-primary">Name</span>
+                                                    <span class="s_website_form_mark"> *</span>
+                                                </label>
+                                                <div class="col-sm px-0">
+                                                    <input placeholder="Please enter recipient name" id="recruitment1" type="text" class="form-control s_website_form_input border-0" name="partner_name" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                            <div class="s_col_no_resize s_col_no_bgcolor">
+                                                <label class="px-0 col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment3">
+                                                    <span class="s_website_form_label_content cst-text-primary">Phone number</span>
+                                                    <span class="s_website_form_mark"> *</span>
+                                                </label>
+                                                <div class="col-sm px-0">
+                                                    <input value="+84 " placeholder="Please re-type your new password" id="recruitment3" type="tel" class="form-control s_website_form_input border-0" name="partner_phone" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="email" data-name="Field">
+                                            <div class="s_col_no_resize s_col_no_bgcolor">
+                                                <label class="px-0 col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment2">
+                                                    <span class="s_website_form_label_content cst-text-primary">Email adress</span>
+                                                    <span class="s_website_form_mark"> *</span>
+                                                </label>
+                                                <div class="col-sm px-0">
+                                                    <input placeholder="Please type your email address" id="recruitment2" type="email" class="form-control s_website_form_input border-0" name="email_from" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-12 s_website_form_field" data-type="text" data-name="Field">
+                                            <div class="s_col_no_resize s_col_no_bgcolor">
+                                                <label class="px-0 col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment4">
+                                                    <span class="s_website_form_label_content cst-text-primary">Short introduction</span>
+                                                </label>
+                                                <div class="col-sm px-0">
+                                                    <textarea placeholder="Please write a short introduction" id="recruitment4" class="form-control s_website_form_input border-0" name="description"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-12 s_website_form_field s_website_form_custom" data-type="binary" data-name="Field">
+                                            <div class="row m-0 mb-3 s_col_no_resize s_col_no_bgcolor">
+                                                <label class="px-0 col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment5">
+                                                    <span class="s_website_form_label_content cst-text-primary">Please attach your CV</span>
+                                                </label>
+                                                <div class="col-sm px-0">
+                                                    <span class="btn btn-primary fw-bold px-3 py-1">Upload</span>
+                                                    <input id="recruitment5" type="file" class="form-control s_website_form_input h-100" name="Resume" style="position: absolute;top: 0;right: 0;padding: 0;opacity: 0;"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input id="recruitment6" type="hidden" class="form-control s_website_form_input" name="job_id"/>
+                                        <input id="recruitment7" type="hidden" class="form-control s_website_form_input" name="department_id"/>
+                                        <div class="form-group col-12 s_website_form_submit position-relative m-1" data-name="Submit Button">
+                                            <div style="width: 200px;" class="s_website_form_label"/>
+                                            <a style="font-size: large;" href="#" role="button" class="btn btn-primary btn-lg s_website_form_send w-100 py-1 fw-bold">Submit</a>
+                                            <span id="s_website_form_result"></span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+
+        <template id="thankyou_job" inherit_id="website_hr_recruitment.thankyou_ir_ui_view" active="True" priority="1">
+            <xpath expr="//div[@id='wrap']" position="replace">
+                <div id="wrap" class="bg-white container col-8">
+                    <div class="oe_structure">
+                        <div class="col-lg-7 p-5 text-center m-auto">
+                            <h3 class="cst-text-primary fw-bold mt-4 mb-3">Thank you for submitting !</h3>
+                            <p style="font-size: 15px;">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Varius morbi enim nunc
+                                faucibus. Donec et odio pellentesque diam volutpat commodo sed. Morbi
+                                blandit cursus risus at ultrices mi tempus imperdiet nulla. Accumsan tortor
+                                posuere ac ut consequat semper. In cursus turpis massa tincidunt dui ut
+                                ornare. Morbi non arcu risus quis varius quam quisque id. Pulvinar
+                                pellentesque habitant morbi tristique senectus et netus et malesuada.
+                            </p>
+                            <a style="font-size: large;" href="/" role="button" class="mt-3 btn btn-primary btn-lg py-1">Back to home</a>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

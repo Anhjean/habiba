@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <template id="products_item" name="Products item" inherit_id="website_sale.products_item" active="True" customize_show="True">
+            <xpath expr="//t[@t-set='product_href']" position="replace">
+                <t t-set="product_href" t-value="product.website_url" />
+            </xpath>
+            <!-- <xpath expr="//span[@t-field='image_holder.image_1920']" position="replace">
+                <img class="img-thumbnail border-0 p-0" t-if="product"  alt="" />
+            </xpath> -->
+            <xpath expr="//form[hasclass('oe_product_cart')]" position="attributes">
+                <attribute name="class" add="border-0" separator=" "/>
+            </xpath>
+        </template>
+
+        <template id="homepage" active="True" inherit_id="website.homepage" customize_show="True" name="Home">
+            <xpath expr="//div[@id='wrap']" position="attributes">
+                <attribute name="t-attf-class" add="bg-white oe_website_sale" separator=" "/>
+            </xpath>
+            <xpath expr="//div[@id='wrap']" position="inside">
+                <div id="carouselHome" style="overflow: hidden;" class="position-relative swiper-container">
+                    <div class="swiper-wrapper">
+                        <t t-foreach="carousel_items" t-as="carousel_item">
+                            <div class="swiper-slide">
+                                <img t-att-src="'/web/image/habiba.homecarousel_item/%s/picture/' % (carousel_item.id)" class="d-block w-100" alt="..."/>
+                                <div class="position-absolute top-0 w-100 h-100 d-flex flex-column align-items-start justify-content-center">
+                                    <div class="m-auto col-12 col-lg-8 p-5 h-75 h-md-auto">
+                                        <div class="">
+                                            <h1 t-if="carousel_item.title" class="fw-bold text-white">
+                                                <t t-esc="carousel_item.title"/>
+                                            </h1>
+                                        </div>
+                                        <p class="lead text-white">
+                                            <b t-if="carousel_item.description"><t t-esc="carousel_item.description"/></b>
+                                        </p>
+                                        <div class="s_btn text-left pt16 pb16" data-name="Buttons">
+                                            <a t-if="carousel_item.btn_primary" t-att-href="carousel_item.btn_primary_link" class="btn btn-primary cst-w-fcontent p-2 fw-bold" role="button"><t t-esc="carousel_item.btn_primary"/></a>
+                                            <a t-if="carousel_item.btn_secondary" t-att-href="carousel_item.btn_secondary_link" class="btn btn-primary cst-w-fcontent p-2 fw-bold" role="button"><t t-esc="carousel_item.btn_secondary"/></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                    <div class="swiper-pagination position-absolute" style="bottom: 1em;"></div>
+                </div>
+
+                <section t-if="bins" class="container hbb_products_table pt-4 py-lg-5 d-flex flex-column align-items-center overflow-hidden" id="homepage_products">
+                    <h5 class="w-100 page-subtitle pb-4 py-lg-4 fw-bold m-0">Top Products</h5>
+                    <div id="homeSwiper" class="p-0 col-12 col-md-10 m-0">
+                        <div class="swiper-wrapper m-auto">
+                            <tr t-foreach="bins" t-as="tr_product">
+                                <t t-foreach="tr_product" t-as="td_product">
+                                    <t t-if="td_product">
+                                        <t t-set="product" t-value="td_product['product']"/>
+                                        <div t-attf-class="mr-md-5 oe_product shadow-sm rounded col-10 col-sm-8 col-md-3 swiper-slide p-2" t-att-data-ribbon-id="td_product['ribbon'].id">
+                                            <div t-attf-class="m-auto px-0 o_wsale_product_grid_wrapper o_wsale_product_grid_wrapper_#{td_product['x']}_#{td_product['y']}">
+                                                <t t-call="website_sale.products_item">
+                                                    <t t-set="product_image_big" t-value="td_product['x'] + td_product['y'] &gt; 2"/>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </t>
+                            </tr>
+                        </div>
+                    </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </section>
+
+                <section class="container hbb_categories_table mb-4" id="">
+                    <h5 class="w-100 page-subtitle py-lg-4 fw-bold mt-4">Menu</h5>
+
+                    <div class="">
+                        <div class="row p-2">
+                            <t t-foreach="featured_categories" t-as="category">
+                                <div class="card col-3 p-2 shadow-light">
+                                    <a class="cst-h-available" t-att-href="'/shop?active_category=' + str(category.id)">
+                                        <img class="card-img-top" t-att-src="'/web/image/product.public.category/%s/image_1920/400x400' % (category.id)" alt="" />
+                                        <div class="card-body px-0 text-center h-100">
+                                            <h6 class="text-center"><t t-esc="category.name"/></h6>
+                                        </div>
+                                    </a>
+                                </div>
+                            </t>
+
+                        </div>
+                    </div>
+                </section>
+            </xpath>
+        </template>
+
+
+    </data>
+</odoo>

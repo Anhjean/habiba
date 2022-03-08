@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_contact_habiba_contact_habiba,contact_habiba.contact_habiba,model_contact_habiba_contact_habiba,base.group_user,1,1,1,1

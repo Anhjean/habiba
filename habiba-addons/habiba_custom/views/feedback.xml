@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <template id="feedback" name="Habiba Customer Feedback">
+      <t t-call="website.layout">
+        <div class="container">
+          <div id="wrap" class="oe_structure oe_empty">
+            <section class="s_title pt32 pb32 o_colored_level" data-vcss="001" data-snippet="s_title" data-name="Title">
+                <div class="s_allow_columns container">
+                    <h1 style="text-align: center;">
+                        <span style="color: rgb(0, 0, 255); font-size: 62px;">Your feedback is important to
+                            us&amp;nbsp;</span>
+                    </h1>
+                </div>
+            </section>
+            <section class="s_text_block pt32 pb32 o_colored_level" data-snippet="s_text_block" data-name="Text">
+                <div class="container s_allow_columns">
+                    <p class="o_default_snippet_text">Great stories have a <b
+                            class="o_default_snippet_text">personality</b>. Consider telling a great story that provides
+                        personality. Writing a story with personality for potential clients will assist with making a
+                        relationship connection. This shows up in small quirks like word choices or phrases. Write from
+                        your point of view, not from someone else's experience.</p>
+                    <p class="o_default_snippet_text">Great stories are <b class="o_default_snippet_text">for
+                            everyone</b> even when only written <b class="o_default_snippet_text">for just one
+                            person</b>. If you try to write with a wide, general audience in mind, your story will sound
+                        fake and lack emotion. No one will be interested. Write for one person. If it’s genuine for the
+                        one, it’s genuine for the rest.</p>
+                </div>
+            </section>
+          </div>
+        </div>
+      </t>
+    </template>
+  </data>
+</odoo>

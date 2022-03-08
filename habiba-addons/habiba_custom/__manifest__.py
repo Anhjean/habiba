@@ -1,0 +1,43 @@
+# -*- coding: utf-8 -*-
+{
+    'name': "Habiba Custom Website",
+    'summary': """Habiba Custom Website""",
+    'description': """Habiba Custom Website""",
+    'author': "Vincent, Willof-God BASSANTI",
+    'website': "",
+    'category': 'Project',
+    'version': '0.1',
+    'depends': [
+        'base', 'website', 'bi_website_add_product', 'portal', 'website_sale', 'sale',
+        'website_sale_product_configurator', 'website_sale_delivery', 'website_customer_order_delivery_date',
+        'product_tags_fork', 'website_event', 'website_blog', 'website_hr_recruitment','website_sale_coupon',
+        'website_sale_wishlist'
+    ],
+    'data': [
+        'views/homepage.xml',
+        'views/templates.xml',
+        'views/views.xml',
+        'views/assets.xml',
+        'views/website.xml',
+        'views/footer.xml',
+        'views/header.xml',
+        'views/shop.xml',
+        'views/cart.xml',
+        'views/portal_template.xml',
+        'views/delivery_carrier.xml',
+        'views/website_hr_recruitment.xml',
+        'views/faq.xml',
+        'security/ir.model.access.csv',
+        'views/cart_lines.xml',
+        'views/auth.xml',
+        'views/aboutus.xml',
+        'views/feedback.xml',
+        'views/payment_policy.xml',
+        'views/shipping_policy.xml',
+        'views/privacy.xml',
+    ],
+
+    'installable': True,
+    'auto_install': False,
+    'application': True,
+}

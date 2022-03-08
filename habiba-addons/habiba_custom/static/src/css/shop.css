@@ -1,0 +1,70 @@
+::placeholder {
+    font-size: 13px;
+    font-weight: 500;
+    align-self: auto;
+}
+
+.plus-minus-input {
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.plus-minus-input .input-group-field {
+    text-align: center;
+    width: 55px;
+    height: 20px;
+    padding: 1rem;
+}
+
+.plus-minus-input .input-group-field::-webkit-inner-spin-button,
+.plus-minus-input .input-group-field ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.plus-minus-input .input-group-button .circle {
+    border-radius: 50%;
+    padding: 0.0em 0.3em;
+}
+
+.center-align {
+    text-align: center !important
+}
+
+.blue-color {
+    color: #0057cf !important
+}
+
+.o_we_custom_image {
+    background: none !important
+}
+
+footer li {
+    list-style: none !important
+}
+
+.form-check {
+    width: 100%
+}
+
+.o_footer_copyright {
+    display: none !important
+}
+
+.o_portal_details button {
+    background: #f2c340 !important;
+    color: #0057cf !important;
+}
+
+footer section {
+    background: #005bc9 !important;
+}
+
+header {
+    background: #f4f4f4 !important;
+}
+
+header nav {
+    background: #f4f4f4 !important;
+}

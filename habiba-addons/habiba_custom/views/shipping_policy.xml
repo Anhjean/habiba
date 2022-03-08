@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="shipping_policy" name="Habiba Shipping Policy">
+            <t t-call="website.layout">
+                <div class="container">
+                    <div id="wrap" class="oe_structure oe_empty">
+                      SHIPPING POLICY
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

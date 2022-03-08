@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <template id="shop_products" active="True" inherit_id="website_sale.products" customize_show="True" name="Show Product">
+            <xpath expr="//div[hasclass('oe_website_sale')]" position="replace">
+                <t t-if="'active_category=' in unslug_url(request.httprequest.url)">
+                    <t t-set="param" t-value="unslug_url(request.httprequest.url).split('=')[1].split('#')[0]"/>
+                    <t t-if="param and int(param) > 0">
+                        <t t-set="active_categ" t-value="int(param)"/>
+                    </t>
+                </t>
+                <div t-if="len(categories)>0" class="hbb_product_category_carousel px-0 py-1 py-md-2 overflow-hidden">
+                    <div class="position-relative overflow-hidden p-0 container o_forum_nav_header_container" id="shopCategSwiper">
+                        <ul class="d-flex flex-nowrap nav nav-pills swiper-wrapper align-items-center" id="pills-tab" role="tablist">
+                            <li t-foreach="categories" t-as="crsl_category" class="d-inline nav-item swiper-slide" role="presentation">
+                                <a t-attf-class="cst-text-primary nav-link #{'active' if active_categ == crsl_category.id else ''} bg-transparent px-1" t-attf-id="pills-#{crsl_category.id}-tab" data-bs-toggle="pill" t-att-data-bs-target="'#pills-' + str(crsl_category.id)" role="tab" t-attf-aria-controls="pills-#{crsl_category.id}" type="button">
+                                    <t t-esc="crsl_category.name"/>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+                <div class="container oe_website_sale">
+                    <div class="row o_wsale_products_main_row mt-2">
+                        <div id="product_filter" class="col-lg-2">
+                            <ul class="d-flex m-0 p-0" id="">
+                                <li class="d-inline pr-4">
+                                    <h5 class="page-subtitle m-0 py-2 py-md-4 fw-bold">
+                                        <a href="#" id="filter_btn" type="button">
+                                            <i class="fa cst-text-primary fa-filter"/>
+                                        </a>
+                                    </h5>
+                                </li>
+                                <li class="d-inline">
+                                    <h5 class="page-subtitle m-0 py-2 py-md-4 fw-bold">
+                                        <a href="#" id="search_btn" type="button">
+                                            <i class="fa cst-text-primary fa-search"/>
+                                        </a>
+                                    </h5>
+                                </li>
+                            </ul>
+                            <div class="d-none" id="product_tags">
+                                <div t-foreach="product_tags" t-as="product_tag" class="form-check">
+                                    <input class="form-check-input" type="radio" name="product_tag" t-attf-id="tag#{product_tag.id}" t-att-value="product_tag.id"/>
+                                    <label class="form-check-label" checked="False" t-attf-for="tag#{product_tag.id}">
+                                        <t t-esc="product_tag.name"/>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="products_grid" t-attf-class="col #{'o_wsale_layout_list' if layout_mode == 'list' else ''}">
+                            <!-- searchbar -->
+                            <form t-if="unslug_url(request.httprequest.path) == '/shop' or unslug_url(request.httprequest.path) == '/'" t-att-action="keep('/shop'+ ('/category/'+slug(category)) if category else None, search=0)" method="get" class="d-none mt-2 mb-3" id="search_bar">
+                                <t t-if="attrib_values">
+                                    <t t-foreach="attrib_values" t-as="a">
+                                        <input type="hidden" name="attrib" t-att-value="'%s-%s' % (a[0], a[1])" />
+                                    </t>
+                                </t>
+                                <input type="text" name="search" class="search-query form-control oe_search_box border-0 shadow-light" placeholder="Search..." t-att-value="search"/>
+                            </form>
+                            <div t-if="bins" class="o_wsale_products_grid_table_wrapper hbb_products_table mt-2">
+                                <div class="table-borderless" t-att-data-ppg="ppg" t-att-data-ppr="ppr">
+                                    <div class="d-none" id="tag_products" style="min-height: 65vh;">
+                                        <div class="justify-content-center card-deck d-flex"></div>
+                                    </div>
+                                    <div class="" id="all_products">
+                                        <div class="justify-content-center card-deck d-flex">
+                                            <t t-foreach="bins" t-as="tr_product">
+                                                <t t-foreach="tr_product" t-as="product_dict">
+                                                    <t t-set="product" t-value="product_dict['product']"/>
+                                                    <t t-if="product">
+                                                        <div t-attf-class="bg-white my-2 p-2 mb-sm-4 mb-md-5 px-md-3 oe_product mr-2 shadow-sm rounded col-12 col-sm-10 mx-sm-auto col-lg-3 col-md-3 col-xs-6 rounded mx-lg-4" t-att-data-ribbon-id="product_dict['ribbon'].id">
+                                                            <div t-attf-class="w-100 o_wsale_product_grid_wrapper o_wsale_product_grid_wrapper_#{product_dict['x']}_#{product_dict['y']}">
+                                                                <t t-call="website_sale.products_item">
+                                                                    <t t-set="product_image_big" t-value="product_dict['x'] + product_dict['y'] &gt; 2"/>
+                                                                </t>
+                                                            </div>
+                                                        </div>
+                                                    </t>
+                                                </t>
+                                            </t>
+                                        </div>
+                                    </div>
+                                    <div class="tab-content d-none" id="categ_products">
+                                        <div t-foreach="categories" t-as="category" t-attf-class="tab-pane fade categ_pane #{'show active' if active_categ == category.id else ''}" t-attf-id="pills-#{category.id}" role="tabpanel" t-attf-aria-labelledby="pills-#{category.id}-tab">
+                                            <div t-attf-class="d-flex card-deck justify-content-center">
+                                                <t t-foreach="bins" t-as="tr_product">
+                                                    <t t-foreach="tr_product" t-as="product_dict">
+                                                        <t t-set="product" t-value="product_dict['product']"/>
+                                                        <t t-if="product">
+                                                            <t t-if="category in product.public_categ_ids">
+                                                                <div t-attf-class="bg-white my-2 p-2 mb-sm-4 mb-md-5 px-md-3 oe_product mr-2 shadow-sm rounded col-12 col-sm-10 mx-sm-auto col-lg-3 col-md-3 col-xs-6 rounded mx-lg-4" t-att-data-ribbon-id="product_dict['ribbon'].id">
+                                                                    <div t-attf-class="w-100 o_wsale_product_grid_wrapper o_wsale_product_grid_wrapper_#{product_dict['x']}_#{product_dict['y']}">
+                                                                        <t t-call="website_sale.products_item">
+                                                                            <t t-set="product_image_big" t-value="product_dict['x'] + product_dict['y'] &gt; 2"/>
+                                                                        </t>
+                                                                    </div>
+                                                                </div>
+                                                            </t>
+                                                        </t>
+                                                    </t>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2"></div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="tag_products" active="True">
+            <t t-foreach="bins" t-as="tr_product">
+                <t t-foreach="tr_product" t-as="product_dict">
+                    <t t-set="product" t-value="product_dict['product']"/>
+                    <t t-if="product">
+                        <div t-attf-class="bg-white my-2 p-2 mb-sm-4 mb-md-5 px-md-3 oe_product mr-2 shadow-sm rounded col-12 col-sm-10 mx-sm-auto col-lg-3 col-md-3 col-xs-6 rounded mx-lg-4" t-att-data-ribbon-id="product_dict['ribbon'].id">
+                            <div t-attf-class="w-100 o_wsale_product_grid_wrapper o_wsale_product_grid_wrapper_#{product_dict['x']}_#{product_dict['y']}">
+                                <t t-call="website_sale.products_item">
+                                    <t t-set="product_image_big" t-value="product_dict['x'] + product_dict['y'] &gt; 2"/>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="remove_search_product_detail" active="True" inherit_id="website_sale.product" name="Remove Search">
+            <xpath expr="//div[hasclass('justify-content-end')]" position="replace"/>
+        </template>
+
+        <template id="variants" active="True" inherit_id="sale.variants">
+            <xpath expr="//ul[@t-att-data-attribute_exclusions]" position="before">
+                <t t-set="ul_class" t-value="ul_class + ' hbb_product_varials'"/>
+                <h4 class="hbb_product_varials_title">CHOOSE YOUR DIPS</h4>
+            </xpath>
+        </template>
+
+        <template id="payment_tokens_list" active="True" inherit_id="payment.payment_tokens_list" name="Payment Tokens list">
+            <xpath expr="//t[@t-foreach='acquirers']//label" position="attributes">
+                <attribute name="class" add="hbb_container" separator=" "/>
+            </xpath>
+            <xpath expr="//t[@t-foreach='acquirers']//label//input" position="after">
+                <span class="hbb_checkmark circle"></span>
+            </xpath>
+            <xpath expr="//t[@t-foreach='pms']//label" position="attributes">
+                <attribute name="class" add="hbb_container" separator=" "/>
+            </xpath>
+            <xpath expr="//t[@t-foreach='pms']//label//input" position="after">
+                <span class="hbb_checkmark circle"></span>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

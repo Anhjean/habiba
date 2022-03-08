@@ -1,0 +1,393 @@
+	.mediaViewInfo {
+		--web-view-name: 10 – 2;
+		--web-view-id: n_0__2;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	:root {
+		--web-view-ids: n_0__2;
+	}
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		border: none;
+	}
+	#n_0__2 {
+		position: absolute;
+		width: 1920px;
+		height: 2338px;
+		background-color: rgba(255,255,255,1);
+		overflow: hidden;
+		--web-view-name: 10 – 2;
+		--web-view-id: n_0__2;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	#Rectangle_65 {
+		fill: rgba(244,244,244,1);
+	}
+	.Rectangle_65 {
+		position: absolute;
+		overflow: visible;
+		width: 1920px;
+		height: 120px;
+		left: 0px;
+		top: 0px;
+	}
+	#Group_1 {
+		position: absolute;
+		width: 299.458px;
+		height: 34.209px;
+		left: 50px;
+		top: 39px;
+		overflow: visible;
+	}
+	#Path_1 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_1 {
+		overflow: visible;
+		position: absolute;
+		width: 24.105px;
+		height: 31.169px;
+		left: 0px;
+		top: 2.611px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_2 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_2 {
+		overflow: visible;
+		position: absolute;
+		width: 20.037px;
+		height: 23.42px;
+		left: 30.055px;
+		top: 10.704px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_3 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_3 {
+		overflow: visible;
+		position: absolute;
+		width: 21.064px;
+		height: 33.738px;
+		left: 54.842px;
+		top: 0.428px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_4 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_4 {
+		overflow: visible;
+		position: absolute;
+		width: 5.352px;
+		height: 31.983px;
+		left: 80.762px;
+		top: 1.798px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_5 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_5 {
+		overflow: visible;
+		position: absolute;
+		width: 21.063px;
+		height: 33.738px;
+		left: 92.27px;
+		top: 0.428px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_6 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_6 {
+		overflow: visible;
+		position: absolute;
+		width: 20.037px;
+		height: 34.124px;
+		left: 116.803px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_7 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_7 {
+		overflow: visible;
+		position: absolute;
+		width: 23.504px;
+		height: 31.169px;
+		left: 154.395px;
+		top: 2.611px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_8 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_8 {
+		overflow: visible;
+		position: absolute;
+		width: 5.352px;
+		height: 31.983px;
+		left: 182.021px;
+		top: 1.798px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_9 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_9 {
+		overflow: visible;
+		position: absolute;
+		width: 16.143px;
+		height: 29.67px;
+		left: 190.793px;
+		top: 4.324px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_10 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_10 {
+		overflow: visible;
+		position: absolute;
+		width: 19.008px;
+		height: 23.335px;
+		left: 208.906px;
+		top: 10.789px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_11 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_11 {
+		overflow: visible;
+		position: absolute;
+		width: 19.352px;
+		height: 33.353px;
+		left: 232.281px;
+		top: 0.428px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_12 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_12 {
+		overflow: visible;
+		position: absolute;
+		width: 19.096px;
+		height: 23.505px;
+		left: 256.428px;
+		top: 10.704px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_13 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_13 {
+		overflow: visible;
+		position: absolute;
+		width: 19.309px;
+		height: 23.077px;
+		left: 280.148px;
+		top: 10.704px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_14 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_14 {
+		overflow: visible;
+		position: absolute;
+		width: 39.16px;
+		height: 34.71px;
+		left: 1822.637px;
+		top: 40px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_14_bj {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_14_bj {
+		overflow: visible;
+		position: absolute;
+		width: 39.16px;
+		height: 34.71px;
+		left: 1822.637px;
+		top: 39px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_14_bj {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_14_bj {
+		overflow: visible;
+		position: absolute;
+		width: 39.16px;
+		height: 34.71px;
+		left: 1822.637px;
+		top: 39px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Ellipse_3 {
+		fill: rgba(242,195,64,1);
+		stroke: rgba(255,255,255,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Ellipse_3 {
+		position: absolute;
+		overflow: visible;
+		width: 25px;
+		height: 25px;
+		left: 1850px;
+		top: 27px;
+	}
+	#n_0 {
+		left: 1852px;
+		top: 31px;
+		position: absolute;
+		overflow: visible;
+		width: 22px;
+		height: 20px;
+		text-align: center;
+		font-family: Montserrat;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 14px;
+		color: rgba(0,91,201,1);
+	}
+	#Mask_Group_2 {
+		position: absolute;
+		width: 39px;
+		height: 38px;
+		left: 1675px;
+		top: 38px;
+		overflow: visible;
+	}
+	#Mask_Group_3 {
+		position: absolute;
+		width: 39px;
+		height: 38px;
+		left: 1626px;
+		top: 38px;
+		overflow: visible;
+	}
+	#Group_42 {
+		position: absolute;
+		width: 28.465px;
+		height: 34.606px;
+		left: 1767.887px;
+		top: 40px;
+		overflow: visible;
+	}
+	#Path_36 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_36 {
+		overflow: visible;
+		position: absolute;
+		width: 14.994px;
+		height: 16.454px;
+		left: 6.736px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_37 {
+		fill: rgba(0,91,201,1);
+	}
+	.Path_37 {
+		overflow: visible;
+		position: absolute;
+		width: 28.465px;
+		height: 16.656px;
+		left: 0px;
+		top: 17.95px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Rectangle_65_br {
+		fill: rgba(244,244,244,1);
+	}
+	.Rectangle_65_br {
+		position: absolute;
+		overflow: visible;
+		width: 716px;
+		height: 372px;
+		left: 602px;
+		top: 200px;
+	}
+	#Reset_password {
+		left: 672px;
+		top: 250px;
+		position: absolute;
+		overflow: visible;
+		width: 576px;
+		height: 37px;
+		text-align: center;
+		font-family: Montserrat;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 30px;
+		color: rgba(0,91,201,1);
+	}
+	#Rectangle_70 {
+		fill: rgba(255,255,255,1);
+	}
+	.Rectangle_70 {
+		position: absolute;
+		overflow: visible;
+		width: 575px;
+		height: 67px;
+		left: 672px;
+		top: 350px;
+	}
+	#Your_email_address {
+		left: 672px;
+		top: 307px;
+		position: absolute;
+		overflow: visible;
+		width: 226px;
+		height: 23px;
+		text-align: left;
+		font-family: Montserrat;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 19px;
+		color: rgba(36,56,83,1);
+	}
+	#Rectangle_26 {
+		fill: rgba(242,195,64,1);
+	}
+	.Rectangle_26 {
+		position: absolute;
+		overflow: visible;
+		width: 575px;
+		height: 49px;
+		left: 672px;
+		top: 447px;
+	}
+	#Send_me_link_to_reset_password {
+		left: 758px;
+		top: 460px;
+		position: absolute;
+		overflow: visible;
+		width: 403px;
+		height: 23px;
+		text-align: center;
+		font-family: Montserrat;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 19px;
+		color: rgba(0,91,201,1);
+	}
+
+

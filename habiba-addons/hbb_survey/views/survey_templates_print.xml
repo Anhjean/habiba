@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="survey_page_print" inherit_id="survey.survey_page_print" name="Survey: print page">
+
+            <xpath expr="//div[hasclass('o_page_header')]//h1" position="attributes">
+                <attribute name="class" add="hbb_title" separator=" "/>
+            </xpath>
+
+            <xpath expr="//h2" position="attributes">
+                <attribute name="class" add="hbb_title" separator=" "/>
+            </xpath>
+
+        </template>
+
+        <!-- add surveil header -->
+        <template id="survey_page_fill" name="Survey Header" inherit_id="survey.layout">
+            <xpath expr="//t[@t-set='no_header']" position="replace">
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

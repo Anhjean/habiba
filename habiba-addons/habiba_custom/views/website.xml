@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="website_ppr_inherit" model="ir.ui.view">
+            <field name="name">website_ppr_inherit</field>
+            <field name="model">website</field>
+            <field name="inherit_id" ref="website.view_website_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Shop Configs">
+                        <group col="4">
+                            <field name="shop_ppg" />
+                            <field name="shop_ppr" />
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+
+
+</odoo>

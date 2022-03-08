@@ -1,0 +1,12 @@
+header:not(.o_header_no_transition) .navbar-brand img {
+  height: 80px;
+}
+$o-website-values-palettes: (
+  (
+    "logo-height": 13rem,
+    "link-underline": "never",
+    "header-template": "hamburger-full",
+    "hamburger-position": "right",
+    "hamburger-type": "off-canvas",
+  )
+);

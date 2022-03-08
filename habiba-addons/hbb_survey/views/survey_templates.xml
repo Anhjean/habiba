@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="question_container" inherit_id="survey.question_container" name="Survey: question container">
+            <xpath expr="//h3" position="attributes">
+                <attribute name="class" add="hbb_title" separator=" "/>
+            </xpath>
+        </template>
+
+        <template id="question_text_box" inherit_id="survey.question_text_box" name="Question: free text box">
+            <xpath expr="//textarea[hasclass('form-control')]" position="attributes">
+                <attribute name="class" add="hbb_text_box" separator=" "/>
+            </xpath>
+        </template>
+
+        <template id="question_char_box" inherit_id="survey.question_char_box" name="Question: text box">
+            <xpath expr="//input[hasclass('form-control')]" position="attributes">
+                <attribute name="class" add="hbb_text_box" separator=" "/>
+            </xpath>
+        </template>
+
+        <template id="question_numerical_box" inherit_id="survey.question_numerical_box" name="Question: numerical box">
+            <xpath expr="//input[hasclass('form-control')]" position="attributes">
+                <attribute name="class" add="hbb_text_box" separator=" "/>
+            </xpath>
+        </template>
+
+        <template id="question_date" inherit_id="survey.question_date" name="Question: date box">
+            <xpath expr="//input[hasclass('form-control')]" position="attributes">
+                <attribute name="class" add="hbb_text_box" separator=" "/>
+            </xpath>
+        </template>
+
+        <template id="question_datetime" inherit_id="survey.question_datetime" name="Question: datetime box">
+            <xpath expr="//input[hasclass('form-control')]" position="attributes">
+                <attribute name="class" add="hbb_text_box" separator=" "/>
+            </xpath>
+        </template>
+
+        <template id="question_simple_choice" inherit_id="survey.question_simple_choice" name="Question: simple choice">
+            <xpath expr="//div[1]//label" position='attributes'>
+                <attribute name="t-att-class" add="' hbb_container '" separator="+"/>
+            </xpath>
+            <xpath expr="//div[1]//input[hasclass('o_survey_form_choice_item')]" position="after">
+                <span class="hbb_checkmark circle"></span>
+            </xpath>
+            <xpath expr="//div[1]//textarea[hasclass('form-control')]" position="attributes">
+                <attribute name="class" add="hbb_text_box" separator=" "/>
+            </xpath>
+
+            <xpath expr="//div[hasclass('js_comments')]//label" position='attributes'>
+                <attribute name="t-att-class" add="' hbb_container '" separator="+"/>
+            </xpath>
+            <xpath expr="//div[hasclass('js_comments')]//input[hasclass('o_survey_form_choice_item')]" position="after">
+                <span class="hbb_checkmark circle"></span>
+            </xpath>
+            <xpath expr="//div[hasclass('js_comments')]//textarea[hasclass('form-control')]" position="attributes">
+                <attribute name="class" add="hbb_text_box" separator=" "/>
+            </xpath>
+
+            <xpath expr="//textarea[hasclass('o_survey_comment')]" position="attributes">
+                <attribute name="class" add="hbb_text_box" separator=" "/>
+            </xpath>
+
+        </template>
+
+        <template id="question_multiple_choice" inherit_id="survey.question_multiple_choice" name="Question: multiple choice">
+            <xpath expr="//div[1]//label" position='attributes'>
+                <attribute name="t-att-class" add="' hbb_container '" separator="+"/>
+            </xpath>
+            <xpath expr="//div[1]//input[hasclass('o_survey_form_choice_item')]" position="after">
+                <span class="hbb_checkmark circle"></span>
+            </xpath>
+            <xpath expr="//div[1]//textarea[hasclass('form-control')]" position="attributes">
+                <attribute name="class" add="hbb_text_box" separator=" "/>
+            </xpath>
+
+            <xpath expr="//div[hasclass('js_ck_comments')]//label" position='attributes'>
+                <attribute name="t-att-class" add="' hbb_container '" separator="+"/>
+            </xpath>
+            <xpath expr="//div[hasclass('js_ck_comments')]//input[hasclass('o_survey_form_choice_item')]" position="after">
+                <span class="hbb_checkmark circle"></span>
+            </xpath>
+            <xpath expr="//div[hasclass('js_ck_comments')]//textarea[hasclass('form-control')]" position="attributes">
+                <attribute name="class" add="hbb_text_box" separator=" "/>
+            </xpath>
+
+            <xpath expr="//textarea[hasclass('o_survey_comment')]" position="attributes">
+                <attribute name="class" add="hbb_text_box" separator=" "/>
+            </xpath>
+        </template>
+
+        <template id="question_matrix" inherit_id="survey.question_matrix" name="Question: matrix">
+            <xpath expr="//table" position="attributes">
+                <attribute name="class" add="hbb_matrix_box" separator=" "/>
+            </xpath>
+            <xpath expr="//td" position='attributes'>
+                <attribute name="t-att-class" add="' hbb_table_container '" separator="+"/>
+            </xpath>
+            <xpath expr="//td//input[hasclass('o_survey_form_choice_item')]" position="after">
+                <span class="hbb_checkmark circle"></span>
+            </xpath>
+        </template>
+
+        <template id="survey_fill_header" inherit_id="survey.survey_fill_header" name="Survey: main page header">
+            <xpath expr="//div[hasclass('o_survey_nav')]/div[2]" position="attributes">
+                <attribute name="t-att-class" add="' hbb_breadcrumb '" separator="+"/>
+            </xpath>
+        </template>
+
+        <template id="survey_fill_form_done" inherit_id="survey.survey_fill_form_done" name="Survey: finished">
+            <xpath expr="//div[hasclass('o_survey_finished')]" position="attributes">
+                <attribute name="class" add="text-center" separator=" "/>
+            </xpath>
+        </template>
+
+        <template id="survey_fill_form_start" inherit_id="survey.survey_fill_form_start" name="Survey: start form content">
+            <xpath expr="//div[hasclass('o_survey_start')]" position="attributes">
+                <attribute name="class" add="text-center" separator=" "/>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

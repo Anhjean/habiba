@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="faq" name="FAQ">
+            <t t-call="website.layout">
+    
+                <div class="container">
+                    <section class="m-auto main-section col-lg-8">
+                        <h2 class="fw-bold my-3 mt-4 cst-text-primary" >Frequently asked questions</h2>
+                        <p class="" id="">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Varius morbi enim nunc
+                            faucibus. Donec et odio pellentesque diam volutpat commodo sed. Morbi
+                            blandit cursus risus at ultrices mi tempus imperdiet nulla. Accumsan tortor
+                            posuere ac ut consequat semper. In cursus turpis massa tincidunt dui ut
+                            ornare. Morbi non arcu risus quis varius quam quisque id. Pulvinar
+                            pellentesque habitant morbi tristique senectus et netus et malesuada.
+                        </p>
+                        <div class="mx-auto py-2 accordion accordion-flush" id="accordionFlushFAQ">
+                            <t t-foreach="faq_items" t-as="item">
+                                <div class="accordion-item">
+                                    <h1 class="accordion-header fw-bold" t-attf-id="flush-heading#{item.id}">
+                                        <button class="rounded px-0 accordion-button bg-transparent collapsed text-black fs-5" type="button"
+                                            data-bs-toggle="collapse" t-attf-data-bs-target="#flush-collaps#{item.id}" aria-expanded="false"
+                                            t-attf-aria-controls="flush-collaps#{item.id}"><t t-esc="item.title"/></button>
+                                    </h1>
+                                    <div t-attf-id="flush-collaps#{item.id}" class="accordion-collapse collapse"
+                                    t-attf-aria-labelledby="flush-heading#{item.id}" data-bs-parent="#accordionFlushFAQ">
+                                        <div class="accordion-body">
+                                            <t t-esc="item.description"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
