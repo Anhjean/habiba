@@ -31,8 +31,8 @@
                                     </h4>
                                 </div>
                             </div>
-                            <a t-foreach="jobs" t-as="job" t-attf-href="/jobs/apply/#{job.id}" t-attf-class="col-6 p-3">
-                                <div class="card card-default mb32 px-5 py-5">
+                            <a t-foreach="jobs" t-as="job" t-attf-href="/jobs/detail/#{job.id}" t-attf-class="col-6 p-3">
+                                <div class="card card-default p-5 h-100">
                                     <div class="card-body" t-att-data-publish="job.website_published and 'on' or 'off'">
                                         <span t-if="not job.website_published" class="badge badge-danger mb8 p-2">unpublished</span>
                                         <h5 class="mt0 mb4 text-black fw-bold">
@@ -63,8 +63,8 @@
                     <div class="oe_structure">
                         <div class="col-lg-12 px-5">
                             <h3 class="cst-text-primary fw-bold mt-4 mb-3"><span t-field="job.name"/></h3>
-                            <h6 class="fw-bold mb-2 mt-4">Job description</h6>
-                            <p style="font-size: 15px;"><t t-esc="job.description"/></p>
+                            <!-- <h6 class="fw-bold mb-2 mt-4">Job description</h6>
+                            <p style="font-size: 15px;"><t t-esc="job.description"/></p> -->
                         </div>
                     </div>
                     <span class="hidden" data-for="hr_recruitment_form" t-att-data-values="{'department_id': job and job.department_id.id or '', 'job_id': job and job.id or ''}" />

@@ -25,7 +25,7 @@
         'views/cart.xml',
         'views/portal_template.xml',
         'views/delivery_carrier.xml',
-        'views/website_hr_recruitment.xml',
+         'views/website_hr_recruitment.xml',
         'views/faq.xml',
         'security/ir.model.access.csv',
         'views/cart_lines.xml',
