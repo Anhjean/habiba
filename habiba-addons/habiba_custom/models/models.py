@@ -4,6 +4,8 @@ from odoo.exceptions import UserError
 from datetime import datetime, timedelta
 import logging
 import json
+
+from odoo.tools.translate import translate
 _logger = logging.getLogger(__name__)
 
 
@@ -89,11 +91,11 @@ class HBBLandingCarousel(models.Model):
     _name = "habiba.homecarousel_item"
 
     picture = fields.Image('Picture')
-    title = fields.Char(string='Title')
-    description = fields.Char(string='Description')
-    btn_primary = fields.Char(string='Button Primary')
+    title = fields.Char(string='Title',translate=True)
+    description = fields.Char(string='Description',translate=True)
+    btn_primary = fields.Char(string='Button Primary',translate=True)
     btn_primary_link = fields.Char(string='Link')
-    btn_secondary = fields.Char(string='Button Primary Link')
+    btn_secondary = fields.Char(string='Button Primary Link',translate=True)
     btn_secondary_link = fields.Char(string='Link')
 
 
