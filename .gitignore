@@ -1,4 +1,4 @@
 .local
 .log
-beanbakery-venv
+habiba-venv
 *.pyc
